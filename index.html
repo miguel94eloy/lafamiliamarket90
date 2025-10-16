@@ -1,0 +1,2101 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Familia Market – Tienda de Abarrotes y Servicios en Miami</title>
+    <meta name="description" content="Compra productos de calidad en Familia Market. Abarrotes, licores, recargas internacionales y más, todo en un solo lugar.">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- OPENSTREETMAP CSS - 100% GRATIS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --color-negro: #000000;
+            --color-rojo: #ed1c24;
+            --color-amarillo: #ffd93f;
+            --color-beige: #f0e7d8;
+            --color-blanco: #ffffff;
+            --color-gris-claro: #f8f9fa;
+            --color-gris-medio: #e9ecef;
+            --color-texto-suave: #666666;
+            --color-bordes: #dee2e6;
+            --color-hover: #c4161d;
+            --transicion: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            --sombra: 0 8px 30px rgba(0,0,0,0.08);
+            --sombra-hover: 0 15px 40px rgba(0,0,0,0.12);
+            --sombra-suave: 0 2px 20px rgba(0,0,0,0.06);
+            --sombra-glass: 0 8px 32px rgba(0,0,0,0.1);
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            font-weight: 400;
+            line-height: 1.6;
+            color: var(--color-negro);
+            background-color: var(--color-blanco);
+            letter-spacing: 0.3px;
+        }
+
+        /* HEADER PRINCIPAL PREMIUM */
+        .header-principal {
+            background: var(--color-blanco);
+            padding: 15px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 1px solid var(--color-bordes);
+            box-shadow: var(--sombra-suave);
+        }
+
+        .logo-principal {
+            height: 55px;
+            transition: var(--transicion);
+            cursor: pointer;
+        }
+
+        .logos-secundarios {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+        }
+
+        .logo-secundario {
+            height: 35px;
+            transition: var(--transicion);
+        }
+
+        .logo-secundario:hover {
+            transform: scale(1.05);
+        }
+
+        .btn-idioma {
+            background: var(--color-rojo);
+            color: var(--color-blanco);
+            border: none;
+            padding: 10px 20px;
+            border-radius: 25px;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: var(--transicion);
+            font-weight: 500;
+            box-shadow: 0 4px 15px rgba(237, 28, 36, 0.2);
+        }
+
+        .btn-idioma:hover {
+            background: var(--color-hover);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(237, 28, 36, 0.3);
+        }
+
+        /* MENÚ DE NAVEGACIÓN CON MARCADOR ACTIVO */
+        .menu-navegacion {
+            background: linear-gradient(135deg, var(--color-rojo), var(--color-hover));
+            padding: 0 5%;
+            position: sticky;
+            top: 85px;
+            z-index: 999;
+            box-shadow: var(--sombra);
+        }
+
+        .menu-lista {
+            display: flex;
+            list-style: none;
+            justify-content: space-between;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .menu-item {
+            position: relative;
+        }
+
+        .menu-link {
+            color: var(--color-blanco);
+            text-decoration: none;
+            padding: 18px 25px;
+            display: block;
+            font-weight: 500;
+            transition: var(--transicion);
+            white-space: nowrap;
+            cursor: pointer;
+            letter-spacing: 0.2px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .menu-link::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            width: 0;
+            height: 3px;
+            background: var(--color-amarillo);
+            transition: var(--transicion);
+            transform: translateX(-50%);
+        }
+
+        .menu-link.activo {
+            font-weight: 600;
+            background: rgba(255,255,255,0.1);
+        }
+
+        .menu-link.activo::after {
+            width: 80%;
+        }
+
+        .menu-link:hover::after {
+            width: 60%;
+        }
+
+        .dropdown {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background: rgba(255,255,255,0.95);
+            backdrop-filter: blur(10px);
+            min-width: 280px;
+            box-shadow: var(--sombra-glass);
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-10px);
+            transition: var(--transicion);
+            z-index: 1001;
+            border-radius: 0 0 12px 12px;
+            overflow: hidden;
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+
+        .menu-item:hover .dropdown {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .dropdown-link {
+            color: var(--color-negro);
+            padding: 15px 25px;
+            display: block;
+            text-decoration: none;
+            border-bottom: 1px solid var(--color-bordes);
+            transition: var(--transicion);
+            cursor: pointer;
+            font-weight: 400;
+        }
+
+        .dropdown-link:hover {
+            background: var(--color-gris-claro);
+            padding-left: 30px;
+            color: var(--color-rojo);
+        }
+
+        /* CONTENIDO PRINCIPAL */
+        .contenido-principal {
+            min-height: 70vh;
+        }
+
+        /* PÁGINA OCULTA POR DEFECTO */
+        .pagina {
+            display: none;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .pagina.activa {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* SLIDER PORTADA MEJORADO - INICIO 50vh */
+        .slider-portada {
+            position: relative;
+            height: 50vh; /* REDUCIDO PARA INICIO */
+            overflow: hidden;
+        }
+
+        #slider-especiales .slider-portada,
+        #sobre-tienda-container .slider-portada {
+            height: 70vh; /* MANTENER PARA OTRAS PÁGINAS */
+        }
+
+        .slider-track {
+            position: relative;
+            width: 100%;
+            height: 100%;
+        }
+
+        .slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            transform: translateX(100%);
+            transition: var(--transicion);
+        }
+
+        .slide.activo {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .slide.saliendo {
+            transform: translateX(-100%);
+        }
+
+        .slide-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .slider-controls {
+            position: absolute;
+            top: 50%;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            padding: 0 20px;
+            transform: translateY(-50%);
+            z-index: 10;
+        }
+
+        .slider-btn {
+            background: rgba(255,255,255,0.9);
+            border: none;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: var(--transicion);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--color-rojo);
+            box-shadow: var(--sombra);
+        }
+
+        .slider-btn:hover {
+            background: var(--color-blanco);
+            transform: scale(1.1);
+            box-shadow: var(--sombra-hover);
+        }
+
+        /* INDICADORES DE PUNTOS ELEGANTES */
+        .slider-indicators {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 8px;
+            z-index: 10;
+        }
+
+        .slider-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.6);
+            cursor: pointer;
+            transition: var(--transicion);
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        }
+
+        .slider-dot:hover {
+            background: rgba(255,255,255,0.9);
+            transform: scale(1.3);
+        }
+
+        .slider-dot.activo {
+            background: var(--color-blanco);
+            transform: scale(1.4);
+            box-shadow: 0 0 10px rgba(255,255,255,0.5);
+        }
+
+        /* SECCIÓN PROMOCIONAL PREMIUM */
+        .seccion-promocional {
+            text-align: center;
+            padding: 80px 5%;
+            background: var(--color-blanco);
+        }
+
+        .titulo-principal {
+            font-size: 3rem;
+            margin-bottom: 25px;
+            color: var(--color-negro);
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            background: linear-gradient(135deg, var(--color-rojo), var(--color-negro));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .subtitulo {
+            font-size: 1.3rem;
+            margin-bottom: 40px;
+            color: var(--color-texto-suave);
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+            font-weight: 400;
+            line-height: 1.8;
+        }
+
+        .beneficios {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+
+        /* TARJETAS GLASS MORPHISM PREMIUM */
+        .beneficio {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(10px);
+            padding: 40px 30px;
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            box-shadow: 
+                0 8px 32px rgba(0, 0, 0, 0.1),
+                inset 0 1px 0 rgba(255, 255, 255, 0.6);
+            transition: var(--transicion);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .beneficio::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, 
+                transparent, 
+                rgba(255, 255, 255, 0.8), 
+                transparent
+            );
+        }
+
+        .beneficio:hover {
+            transform: translateY(-8px);
+            box-shadow: 
+                0 15px 40px rgba(0, 0, 0, 0.15),
+                inset 0 1px 0 rgba(255, 255, 255, 0.8);
+            background: rgba(255, 255, 255, 0.8);
+        }
+
+        .beneficio-icono {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            display: block;
+        }
+
+        /* BOTONES CIRCULARES - ESTRUCTURA 6+4 CENTRADA */
+        .seccion-circulos {
+            padding: 80px 5%;
+            text-align: center;
+            background: var(--color-blanco);
+        }
+
+        .titulo-seccion {
+            font-size: 2.5rem;
+            margin-bottom: 50px;
+            color: var(--color-negro);
+            font-weight: 700;
+        }
+
+        .contenedor-circulos {
+            display: grid;
+            grid-template-columns: repeat(6, 1fr);
+            gap: 15px; /* MÁS JUNTOS */
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* Distribución específica: 6 arriba, 4 abajo centrados */
+        .item-circulo:nth-child(-n+6) {
+            /* Primeros 6 botones - fila superior */
+        }
+
+        .item-circulo:nth-child(7) {
+            grid-column: 2 / 3;
+        }
+
+        .item-circulo:nth-child(8) {
+            grid-column: 3 / 4;
+        }
+
+        .item-circulo:nth-child(9) {
+            grid-column: 4 / 5;
+        }
+
+        .item-circulo:nth-child(10) {
+            grid-column: 5 / 6;
+        }
+
+        .item-circulo {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+
+        .boton-circular {
+            width: 145px; /* MÁS GRANDE */
+            height: 145px; /* MÁS GRANDE */
+            border-radius: 50%;
+            background: transparent; /* SIN FONDO */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: var(--transicion);
+            overflow: hidden;
+            position: relative;
+            box-shadow: var(--sombra);
+            border: none; /* SIN BORDE */
+            margin-bottom: 10px;
+        }
+
+        .boton-circular::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, var(--color-amarillo), transparent);
+            opacity: 0;
+            transition: var(--transicion);
+        }
+
+        .boton-circular:hover {
+            transform: scale(1.15) rotate(5deg);
+            box-shadow: var(--sombra-hover);
+        }
+
+        .boton-circular:hover::before {
+            opacity: 0.1;
+        }
+
+        .boton-circular img {
+            width: 100%; /* OCUPA TODO EL CÍRCULO */
+            height: 100%; /* OCUPA TODO EL CÍRCULO */
+            object-fit: cover; /* LA IMAGEN SE AJUSTA AL CÍRCULO */
+            position: relative;
+            z-index: 2;
+        }
+
+        .texto-circulo {
+            color: var(--color-negro);
+            font-weight: 600;
+            font-size: 0.85rem;
+            text-align: center;
+            line-height: 1.2;
+            margin-top: 5px;
+        }
+
+        /* BANNER LOGOS ELEGANTE - HERO STYLE */
+        .logos-principales {
+            padding: 60px 5%;
+            background: linear-gradient(135deg, var(--color-gris-claro), var(--color-gris-medio));
+            box-shadow: inset 0 -2px 10px rgba(0,0,0,0.05);
+            position: relative;
+        }
+
+        .logos-principales::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, 
+                transparent, 
+                var(--color-bordes), 
+                transparent
+            );
+        }
+
+        .logos-grid {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 50px;
+            max-width: 1200px;
+            margin: 0 auto;
+            flex-wrap: wrap;
+        }
+
+        .logo-item {
+            text-align: center;
+            transition: var(--transicion);
+            padding: 15px;
+        }
+
+        .logo-item:hover {
+            transform: translateY(-5px);
+        }
+
+        .logo-grande {
+            height: 70px;
+            transition: var(--transicion);
+            filter: brightness(0.9);
+        }
+
+        .logo-item:hover .logo-grande {
+            filter: brightness(1);
+            transform: scale(1.05);
+        }
+
+        .logo-item p {
+            margin-top: 10px;
+            color: var(--color-texto-suave);
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        /* PÁGINAS INTERNAS */
+        .pagina-interna {
+            padding: 40px 5%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .btn-atras {
+            background: var(--color-rojo);
+            color: var(--color-blanco);
+            border: none;
+            padding: 12px 25px;
+            border-radius: 25px;
+            cursor: pointer;
+            margin-bottom: 30px;
+            transition: var(--transicion);
+            position: sticky;
+            top: 150px;
+            z-index: 100;
+            font-size: 1rem;
+            font-weight: 600;
+            box-shadow: 0 4px 15px rgba(237, 28, 36, 0.2);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-atras:hover {
+            background: var(--color-hover);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(237, 28, 36, 0.3);
+        }
+
+        .titulo-pagina {
+            color: var(--color-negro);
+            font-size: 3rem;
+            text-align: center;
+            margin-bottom: 50px;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--color-rojo), var(--color-negro));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* ESTILOS PARA CATEGORÍAS */
+        .grid-imagenes {
+            display: grid;
+            gap: 25px;
+            margin-bottom: 50px;
+        }
+
+        .fila-completa {
+            grid-column: 1 / -1;
+        }
+
+        .fila-mitad {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 25px;
+        }
+
+        .imagen-grande {
+            width: 100%;
+            height: 450px;
+            object-fit: cover;
+            border-radius: 20px;
+            transition: var(--transicion);
+            box-shadow: var(--sombra);
+        }
+
+        .imagen-pequena {
+            width: 100%;
+            height: 350px;
+            object-fit: cover;
+            border-radius: 20px;
+            transition: var(--transicion);
+            box-shadow: var(--sombra);
+        }
+
+        .imagen-grande:hover, .imagen-pequena:hover {
+            transform: scale(1.02);
+            box-shadow: var(--sombra-hover);
+        }
+
+        .texto-categoria {
+            text-align: center;
+            padding: 50px;
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            box-shadow: var(--sombra-glass);
+            margin-top: 30px;
+        }
+
+        .btn-donde-encontrarnos {
+            background: linear-gradient(135deg, var(--color-rojo), var(--color-hover));
+            color: var(--color-blanco);
+            border: none;
+            padding: 18px 35px;
+            border-radius: 30px;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: var(--transicion);
+            margin-top: 25px;
+            text-decoration: none;
+            display: inline-block;
+            font-weight: 600;
+            letter-spacing: 0.3px;
+            box-shadow: 0 6px 20px rgba(237, 28, 36, 0.3);
+        }
+
+        .btn-donde-encontrarnos:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(237, 28, 36, 0.4);
+        }
+
+        /* ESTILOS PARA QUIÉNES SOMOS */
+        .imagen-portada {
+            width: 100%;
+            height: 450px;
+            object-fit: cover;
+            border-radius: 20px;
+            margin-bottom: 50px;
+            box-shadow: var(--sombra);
+        }
+
+        .seccion-texto {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(10px);
+            padding: 50px;
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            box-shadow: var(--sombra-glass);
+            margin-bottom: 30px;
+            position: relative;
+        }
+
+        .seccion-texto::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 6px;
+            height: 100%;
+            background: linear-gradient(135deg, var(--color-rojo), var(--color-amarillo));
+            border-radius: 3px 0 0 3px;
+        }
+
+        .seccion-texto h2 {
+            color: var(--color-negro);
+            margin-bottom: 25px;
+            font-size: 2rem;
+            font-weight: 700;
+        }
+
+        .seccion-texto p {
+            margin-bottom: 20px;
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: var(--color-texto-suave);
+        }
+
+        /* MAPA OPENSTREETMAP - 100% GRATIS */
+        #mapa-tiendas {
+            height: 500px;
+            width: 100%;
+            border-radius: 20px;
+            box-shadow: var(--sombra);
+            margin-bottom: 50px;
+            border: 1px solid var(--color-bordes);
+            z-index: 1;
+        }
+
+        .tarjetas-tiendas {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            margin-top: 50px;
+        }
+
+        .tarjeta-tienda {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(10px);
+            padding: 30px;
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            box-shadow: var(--sombra-glass);
+            transition: var(--transicion);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .tarjeta-tienda::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(135deg, var(--color-rojo), var(--color-amarillo));
+        }
+
+        .tarjeta-tienda:hover {
+            transform: translateY(-8px);
+            box-shadow: 
+                0 15px 40px rgba(0, 0, 0, 0.15),
+                inset 0 1px 0 rgba(255, 255, 255, 0.8);
+            background: rgba(255, 255, 255, 0.8);
+        }
+
+        .tienda-nombre {
+            color: var(--color-negro);
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid rgba(0,0,0,0.1);
+            font-weight: 700;
+        }
+
+        .tienda-direccion {
+            color: var(--color-texto-suave);
+            margin-bottom: 20px;
+            font-size: 1rem;
+            line-height: 1.6;
+        }
+
+        .tienda-horario {
+            background: rgba(248, 249, 250, 0.8);
+            padding: 20px;
+            border-radius: 12px;
+            margin-bottom: 25px;
+            font-size: 0.95rem;
+            color: var(--color-negro);
+            border-left: 4px solid var(--color-rojo);
+            backdrop-filter: blur(5px);
+        }
+
+        .tienda-botones {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 12px;
+            margin-top: 25px;
+        }
+
+        /* BOTONES MODERNOS GLASS MORPHISM */
+        .btn-tienda {
+            background: rgba(255, 255, 255, 0.9);
+            border: 2px solid var(--color-rojo);
+            color: var(--color-rojo);
+            padding: 12px 20px;
+            border-radius: 10px;
+            text-decoration: none;
+            text-align: center;
+            transition: var(--transicion);
+            font-weight: 600;
+            font-size: 0.9rem;
+            cursor: pointer;
+            backdrop-filter: blur(10px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .btn-tienda:hover {
+            background: var(--color-rojo);
+            color: var(--color-blanco);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(237, 28, 36, 0.3);
+        }
+
+        /* ESTILOS PARA CONTACTO */
+        .redes-sociales {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            margin-top: 50px;
+        }
+
+        .red-social {
+            display: inline-block;
+            width: 120px;
+            height: 120px;
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(10px);
+            border-radius: 25px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            transition: var(--transicion);
+            box-shadow: var(--sombra-glass);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            padding: 20px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .red-social::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, var(--color-amarillo), transparent);
+            opacity: 0;
+            transition: var(--transicion);
+        }
+
+        .red-social:hover {
+            transform: scale(1.1) rotate(5deg);
+            box-shadow: var(--sombra-hover);
+        }
+
+        .red-social:hover::before {
+            opacity: 0.2;
+        }
+
+        .icono-red-social {
+            width: 70px;
+            height: 70px;
+            object-fit: contain;
+            position: relative;
+            z-index: 2;
+        }
+
+        /* FOOTER */
+        .footer {
+            background: var(--color-negro);
+            color: var(--color-blanco);
+            padding: 60px 5%;
+            margin-top: 80px;
+        }
+
+        .footer-contenido {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 50px;
+        }
+
+        .footer-seccion h3 {
+            color: var(--color-amarillo);
+            margin-bottom: 25px;
+            font-weight: 700;
+            font-size: 1.3rem;
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-link {
+            margin-bottom: 12px;
+        }
+
+        .footer-link a {
+            color: #ccc;
+            text-decoration: none;
+            transition: var(--transicion);
+            cursor: pointer;
+            font-weight: 400;
+            display: block;
+            padding: 5px 0;
+        }
+
+        .footer-link a:hover {
+            color: var(--color-amarillo);
+            padding-left: 8px;
+        }
+
+        .copyright {
+            text-align: center;
+            margin-top: 50px;
+            padding-top: 30px;
+            border-top: 1px solid #444;
+            color: #999;
+            font-size: 0.9rem;
+        }
+
+        /* RESPONSIVE COMPLETO OPTIMIZADO */
+        @media (max-width: 1200px) {
+            .contenedor-circulos {
+                grid-template-columns: repeat(4, 1fr);
+                gap: 15px;
+            }
+            
+            .item-circulo:nth-child(-n+10) {
+                grid-column: auto;
+            }
+        }
+
+        @media (max-width: 1024px) {
+            .tarjetas-tiendas {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .contenedor-circulos {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header-principal {
+                flex-direction: column;
+                gap: 15px;
+                padding: 15px 5%;
+            }
+            
+            .logos-secundarios {
+                gap: 10px;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            .logo-secundario {
+                height: 25px;
+            }
+            
+            .menu-lista {
+                flex-direction: column;
+            }
+            
+            .menu-link {
+                padding: 15px;
+                text-align: center;
+                border-bottom: 1px solid rgba(255,255,255,0.1);
+            }
+            
+            .dropdown {
+                position: static;
+                display: none;
+                box-shadow: none;
+                border-radius: 0;
+            }
+            
+            .menu-item:hover .dropdown {
+                display: block;
+            }
+            
+            .slider-portada {
+                height: 40vh;
+            }
+            
+            #slider-especiales .slider-portada,
+            #sobre-tienda-container .slider-portada {
+                height: 50vh;
+            }
+            
+            .titulo-principal {
+                font-size: 2.2rem;
+            }
+            
+            .titulo-pagina {
+                font-size: 2.2rem;
+            }
+            
+            .fila-mitad {
+                grid-template-columns: 1fr;
+            }
+            
+            /* TARJETAS TIENDAS EN FILA HORIZONTAL MOBILE */
+            .tarjetas-tiendas {
+                display: flex;
+                overflow-x: auto;
+                gap: 20px;
+                padding: 10px 0;
+                scroll-snap-type: x mandatory;
+                -webkit-overflow-scrolling: touch;
+            }
+            
+            .tarjeta-tienda {
+                min-width: 280px;
+                scroll-snap-align: start;
+                flex-shrink: 0;
+            }
+            
+            .redes-sociales {
+                flex-direction: column;
+                align-items: center;
+                gap: 25px;
+            }
+            
+            .red-social {
+                width: 140px;
+                height: 140px;
+            }
+            
+            .imagen-grande {
+                height: 350px;
+            }
+            
+            .imagen-pequena {
+                height: 280px;
+            }
+            
+            .slider-indicators {
+                bottom: 15px;
+            }
+            
+            .slider-dot {
+                width: 6px;
+                height: 6px;
+            }
+            
+            /* BOTONES CIRCULARES RESPONSIVE */
+            .contenedor-circulos {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 15px;
+            }
+            
+            .boton-circular {
+                width: 120px;
+                height: 120px;
+            }
+            
+            .texto-circulo {
+                font-size: 0.75rem;
+            }
+            
+            /* BANNER LOGOS MOBILE COMPACTO */
+            .logos-grid {
+                gap: 20px;
+                overflow-x: auto;
+                padding: 10px 0;
+                justify-content: flex-start;
+                scroll-snap-type: x mandatory;
+            }
+            
+            .logo-item {
+                min-width: 120px;
+                scroll-snap-align: start;
+                flex-shrink: 0;
+                padding: 10px;
+            }
+            
+            .logo-grande {
+                height: 40px;
+            }
+            
+            .logo-item p {
+                font-size: 0.7rem;
+                margin-top: 5px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .tarjetas-tiendas {
+                gap: 15px;
+            }
+            
+            .tarjeta-tienda {
+                min-width: 260px;
+                padding: 20px;
+            }
+            
+            .imagen-grande {
+                height: 280px;
+            }
+            
+            .imagen-pequena {
+                height: 220px;
+            }
+            
+            .red-social {
+                width: 120px;
+                height: 120px;
+            }
+            
+            .icono-red-social {
+                width: 60px;
+                height: 60px;
+            }
+            
+            /* BOTONES CIRCULARES MOBILE */
+            .contenedor-circulos {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 12px;
+            }
+            
+            .boton-circular {
+                width: 110px;
+                height: 110px;
+            }
+            
+            .texto-circulo {
+                font-size: 0.7rem;
+            }
+            
+            .titulo-principal {
+                font-size: 1.8rem;
+            }
+            
+            .titulo-pagina {
+                font-size: 1.8rem;
+            }
+            
+            /* HEADER MÓVIL MÁS COMPACTO */
+            .header-principal {
+                padding: 10px 5%;
+            }
+            
+            .logo-principal {
+                height: 40px;
+            }
+            
+            .btn-idioma {
+                padding: 8px 15px;
+                font-size: 0.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- HEADER PRINCIPAL PREMIUM -->
+    <header class="header-principal">
+        <img src="images/header/logo-principal.webp" alt="Familia Market" class="logo-principal" onclick="mostrarPagina('inicio')">
+        <div class="logos-secundarios">
+            <img src="images/header/logo-florida-lottery.webp" alt="Florida Lottery" class="logo-secundario">
+            <img src="images/header/logo-ria-money.webp" alt="RIA Money Transfer" class="logo-secundario">
+            <img src="images/header/logo-ebt-accepted.webp" alt="We Accept EBT" class="logo-secundario">
+            <img src="images/header/logo-boss-revolution.webp" alt="BOSS Revolution" class="logo-secundario">
+        </div>
+        <button class="btn-idioma">Cambiar a Español</button>
+    </header>
+
+    <!-- MENÚ DE NAVEGACIÓN CON MARCADOR ACTIVO -->
+    <nav class="menu-navegacion">
+        <ul class="menu-lista">
+            <li class="menu-item">
+                <a class="menu-link" onclick="mostrarPagina('inicio')">Categorías</a>
+                <div class="dropdown">
+                    <a class="dropdown-link" onclick="mostrarCategoria('abarrotes')">Abarrotes</a>
+                    <a class="dropdown-link" onclick="mostrarCategoria('electronica')">Electrónica</a>
+                    <a class="dropdown-link" onclick="mostrarCategoria('ferreteria')">Ferretería</a>
+                    <a class="dropdown-link" onclick="mostrarCategoria('bebidas')">Bebidas</a>
+                    <a class="dropdown-link" onclick="mostrarCategoria('comestibles')">Comestibles</a>
+                    <a class="dropdown-link" onclick="mostrarCategoria('snacks')">Snacks</a>
+                    <a class="dropdown-link" onclick="mostrarCategoria('higiene')">Higiene y cuidado personal</a>
+                    <a class="dropdown-link" onclick="mostrarCategoria('hogar')">Hogar</a>
+                    <a class="dropdown-link" onclick="mostrarCategoria('promociones')">Promociones / Especiales</a>
+                    <a class="dropdown-link" onclick="mostrarCategoria('otros')">Otros productos destacados</a>
+                </div>
+            </li>
+            <li class="menu-item"><a class="menu-link" onclick="mostrarPagina('quienes-somos')">Quiénes Somos</a></li>
+            <li class="menu-item"><a class="menu-link" onclick="mostrarPagina('mis-tiendas')">Mis Tiendas</a></li>
+            <li class="menu-item"><a class="menu-link" onclick="mostrarPagina('especiales')">Especiales / Promociones</a></li>
+            <li class="menu-item"><a class="menu-link" onclick="mostrarPagina('contacto')">Contacto</a></li>
+        </ul>
+    </nav>
+
+    <!-- CONTENIDO PRINCIPAL -->
+    <main class="contenido-principal">
+        
+        <!-- PÁGINA DE INICIO -->
+        <section id="inicio" class="pagina activa">
+            <!-- SLIDER PORTADA 50vh -->
+            <div class="slider-portada" id="slider-inicio">
+                <div class="slider-track">
+                    <div class="slide activo">
+                        <img src="images/portada/portada-1.webp" alt="Familia Market - Todo en un solo lugar" class="slide-img">
+                    </div>
+                    <div class="slide">
+                        <img src="images/portada/portada-2.webp" alt="Productos frescos y de calidad" class="slide-img">
+                    </div>
+                    <div class="slide">
+                        <img src="images/portada/portada-3.webp" alt="Servicios internacionales disponibles" class="slide-img">
+                    </div>
+                </div>
+                <div class="slider-controls">
+                    <button class="slider-btn prev">‹</button>
+                    <button class="slider-btn next">›</button>
+                </div>
+            </div>
+
+            <!-- SECCIÓN PROMOCIONAL -->
+            <div class="seccion-promocional">
+                <h1 class="titulo-principal">Tu Tienda de Barrio, Tu Conexión con el Mundo</h1>
+                <p class="subtitulo">En Familia Market encuentras todo lo que necesitas para tu hogar y para mantenerte conectado con tus seres queridos. Más que una tienda, somos parte de tu comunidad.</p>
+                
+                <div class="beneficios">
+                    <div class="beneficio">
+                        <div class="beneficio-icono">🛒</div>
+                        <h3>Todo en un Solo Lugar</h3>
+                        <p>Desde alimentos frescos hasta productos de hogar, todo lo esencial para tu día a día.</p>
+                    </div>
+                    <div class="beneficio">
+                        <div class="beneficio-icono">🌎</div>
+                        <h3>Conexión Internacional</h3>
+                        <p>Transferencias de dinero y recargas a más de 190 países. Tu puente con el mundo.</p>
+                    </div>
+                    <div class="beneficio">
+                        <div class="beneficio-icono">💳</div>
+                        <h3>Flexibilidad de Pago</h3>
+                        <p>Aceptamos EBT/Food Stamps y todas las tarjetas principales. Compra con comodidad.</p>
+                    </div>
+                    <div class="beneficio">
+                        <div class="beneficio-icono">🤝</div>
+                        <h3>Atención Personalizada</h3>
+                        <p>Conocemos a nuestros clientes por su nombre. Tu confianza es nuestro mayor orgullo.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- BANNER LOGOS ELEGANTE -->
+            <div class="logos-principales">
+                <div class="logos-grid">
+                    <div class="logo-item">
+                        <img src="images/header/logo-florida-lottery.webp" alt="Florida Lottery" class="logo-grande">
+                        <p>Lotería de Florida</p>
+                    </div>
+                    <div class="logo-item">
+                        <img src="images/header/logo-ria-money.webp" alt="RIA Money Transfer" class="logo-grande">
+                        <p>Transferencias Internacionales</p>
+                    </div>
+                    <div class="logo-item">
+                        <img src="images/header/logo-ebt-accepted.webp" alt="We Accept EBT" class="logo-grande">
+                        <p>Aceptamos EBT/Food Stamps</p>
+                    </div>
+                    <div class="logo-item">
+                        <img src="images/header/logo-boss-revolution.webp" alt="BOSS Revolution" class="logo-grande">
+                        <p>Recargas Internacionales</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- BOTONES CIRCULARES MEJORADOS -->
+            <div class="seccion-circulos">
+                <h2 class="titulo-seccion">Ver Por Departamento</h2>
+                <div class="contenedor-circulos">
+                    <!-- Fila 1 - 6 círculos -->
+                    <div class="item-circulo">
+                        <div class="boton-circular" onclick="mostrarCategoria('abarrotes')">
+                            <img src="images/circulos/abarrotes.webp" alt="Abarrotes">
+                        </div>
+                        <div class="texto-circulo">Abarrotes</div>
+                    </div>
+                    <div class="item-circulo">
+                        <div class="boton-circular" onclick="mostrarCategoria('electronica')">
+                            <img src="images/circulos/electronica.webp" alt="Electrónica">
+                        </div>
+                        <div class="texto-circulo">Electrónica</div>
+                    </div>
+                    <div class="item-circulo">
+                        <div class="boton-circular" onclick="mostrarCategoria('ferreteria')">
+                            <img src="images/circulos/ferreteria.webp" alt="Ferretería">
+                        </div>
+                        <div class="texto-circulo">Ferretería</div>
+                    </div>
+                    <div class="item-circulo">
+                        <div class="boton-circular" onclick="mostrarCategoria('bebidas')">
+                            <img src="images/circulos/bebidas.webp" alt="Bebidas">
+                        </div>
+                        <div class="texto-circulo">Bebidas</div>
+                    </div>
+                    <div class="item-circulo">
+                        <div class="boton-circular" onclick="mostrarCategoria('comestibles')">
+                            <img src="images/circulos/comestibles.webp" alt="Comestibles">
+                        </div>
+                        <div class="texto-circulo">Comestibles</div>
+                    </div>
+                    <div class="item-circulo">
+                        <div class="boton-circular" onclick="mostrarCategoria('snacks')">
+                            <img src="images/circulos/snacks.webp" alt="Snacks">
+                        </div>
+                        <div class="texto-circulo">Snacks</div>
+                    </div>
+                    
+                    <!-- Fila 2 - 4 círculos CENTRADOS -->
+                    <div class="item-circulo">
+                        <div class="boton-circular" onclick="mostrarCategoria('higiene')">
+                            <img src="images/circulos/higiene.webp" alt="Higiene">
+                        </div>
+                        <div class="texto-circulo">Higiene</div>
+                    </div>
+                    <div class="item-circulo">
+                        <div class="boton-circular" onclick="mostrarCategoria('hogar')">
+                            <img src="images/circulos/hogar.webp" alt="Hogar">
+                        </div>
+                        <div class="texto-circulo">Hogar</div>
+                    </div>
+                    <div class="item-circulo">
+                        <div class="boton-circular" onclick="mostrarCategoria('promociones')">
+                            <img src="images/circulos/promociones.webp" alt="Promociones">
+                        </div>
+                        <div class="texto-circulo">Ofertas</div>
+                    </div>
+                    <div class="item-circulo">
+                        <div class="boton-circular" onclick="mostrarCategoria('otros')">
+                            <img src="images/circulos/destacados.webp" alt="Destacados">
+                        </div>
+                        <div class="texto-circulo">Destacados</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- QUIÉNES SOMOS -->
+        <section id="quienes-somos" class="pagina">
+            <div class="pagina-interna">
+                <button class="btn-atras" onclick="volverAtras()">← Atrás</button>
+                <h1 class="titulo-pagina">Quiénes Somos</h1>
+                
+                <img src="images/quienes-somos/portada.webp" alt="Familia Market - Nuestra tienda" class="imagen-portada">
+                
+                <div class="seccion-texto">
+                    <h2>Nuestra Historia: De un Sueño a Tu Comunidad</h2>
+                    <p>Familia Market nació del sueño de crear un espacio donde la comunidad hispana de Miami pudiera encontrar no solo productos de calidad, sino también ese calor de hogar que tanto extrañamos. Comenzamos como una pequeña tienda de barrio con una misión clara: <strong>ser el puente entre tu vida en Estados Unidos y tus raíces latinas</strong>.</p>
+                    <p>Hoy, seguimos creciendo pero nunca hemos perdido nuestra esencia. Seguimos siendo esa tienda donde conoces a tus vecinos, donde el dueño te saluda por tu nombre, y donde cada producto fue seleccionado pensando en tu familia.</p>
+                </div>
+
+                <div class="seccion-texto">
+                    <h2>Nuestra Misión: Más Allá de una Simple Compra</h2>
+                    <p><strong>Facilitar tu vida diaria</strong> ofreciendo todo lo que necesitas en un solo lugar, con la calidad que mereces y el servicio que te hace sentir en casa. No solo vendemos productos; <strong>construimos relaciones</strong> y fortalecemos los lazos que unen a nuestra comunidad.</p>
+                    <p>Creemos que cada visita a Familia Market debe ser una experiencia que simplifique tu día y enriquezca tu vida.</p>
+                </div>
+
+                <div class="seccion-texto">
+                    <h2>Nuestra Visión: Tu Socio de Confianza</h2>
+                    <p>Ser reconocidos como <strong>el destino preferido de la comunidad hispana en Miami</strong>, no solo por la variedad de nuestros productos, sino por la confianza que generamos en cada interacción. Aspiramos a ser esa tienda donde las nuevas generaciones sientan el mismo cariño que sus padres.</p>
+                    <p>Visualizamos un futuro donde Familia Market siga siendo el corazón comercial de tu barrio, evolucionando con las necesidades de tu familia mientras mantenemos nuestra esencia familiar.</p>
+                </div>
+
+                <div class="seccion-texto">
+                    <h2>Nuestros Valores: El Corazón de lo que Hacemos</h2>
+                    <p><strong>✅ Confianza:</strong> Cada producto en nuestros estantes pasa por un riguroso proceso de selección. Tu seguridad es nuestra prioridad.</p>
+                    <p><strong>✅ Calidad:</strong> Desde los abarrotes básicos hasta los servicios internacionales, garantizamos excelencia en todo lo que ofrecemos.</p>
+                    <p><strong>✅ Comunidad:</strong> Somos más que un negocio; somos vecinos que apoyamos el crecimiento y bienestar de nuestra localidad.</p>
+                    <p><strong>✅ Servicio Personalizado:</strong> Te conocemos, entendemos tus necesidades y nos adaptamos para servirte mejor.</p>
+                    <p><strong>✅ Innovación:</strong> Incorporamos constantemente nuevos productos y servicios que simplifiquen tu vida y mantengan conectada a tu familia.</p>
+                </div>
+
+                <div class="seccion-texto" style="text-align: center; background: rgba(240, 231, 216, 0.7);">
+                    <h2 style="color: var(--color-negro);">¿Por Qué Elegirnos?</h2>
+                    <p style="font-size: 1.2rem; font-weight: 600; color: var(--color-texto-suave);">Porque en Familia Market no solo encuentras productos, encuentras <strong>soluciones, conexión y comunidad</strong>. Donde cada visita te hace sentir como en casa.</p>
+                    <button class="btn-donde-encontrarnos" onclick="mostrarPagina('mis-tiendas')">Ven a Conocernos</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- MIS TIENDAS -->
+        <section id="mis-tiendas" class="pagina">
+            <div class="pagina-interna">
+                <button class="btn-atras" onclick="volverAtras()">← Atrás</button>
+                <h1 class="titulo-pagina">Nuestras Tiendas</h1>
+                
+                <!-- MAPA OPENSTREETMAP 100% GRATIS -->
+                <div id="mapa-tiendas"></div>
+
+                <div class="tarjetas-tiendas">
+                    <!-- Tienda 1 - Miami Gardens -->
+                    <div class="tarjeta-tienda">
+                        <h3 class="tienda-nombre">Familia Market - Miami Gardens</h3>
+                        <p class="tienda-direccion">📍 19139 NW 27th Ave, Miami, FL 33114</p>
+                        <div class="tienda-horario">
+                            <strong>Horario de Atención:</strong><br>
+                            Lunes a Miércoles: 8:00 AM - 12:00 AM<br>
+                            Jueves a Domingo: 8:00 AM - 1:00 AM
+                        </div>
+                        <div class="tienda-botones">
+                            <a href="https://maps.app.goo.gl/fS89V83GGuPCXW3H6?g_st=awb" class="btn-tienda" target="_blank">
+                                <span>🗺️</span> Cómo Llegar
+                            </a>
+                            <button class="btn-tienda" onclick="mostrarPagina('especiales')">
+                                <span>🎯</span> Especiales
+                            </button>
+                            <button class="btn-tienda" onclick="mostrarSobreTienda('sobre-tienda1')">
+                                <span>🏪</span> Sobre Esta Tienda
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Tienda 2 - Allapattah -->
+                    <div class="tarjeta-tienda">
+                        <h3 class="tienda-nombre">Familia Market - Allapattah</h3>
+                        <p class="tienda-direccion">📍 2412 NW 27th Ave, Miami, FL 33142</p>
+                        <div class="tienda-horario">
+                            <strong>Horario de Atención:</strong><br>
+                            Lunes a Domingo: 8:00 AM - 2:00 AM
+                        </div>
+                        <div class="tienda-botones">
+                            <a href="https://www.google.com/maps?q=25.814667,-80.240201" class="btn-tienda" target="_blank">
+                                <span>🗺️</span> Cómo Llegar
+                            </a>
+                            <button class="btn-tienda" onclick="mostrarPagina('especiales')">
+                                <span>🎯</span> Especiales
+                            </button>
+                            <button class="btn-tienda" onclick="mostrarSobreTienda('sobre-tienda2')">
+                                <span>🏪</span> Sobre Esta Tienda
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Tienda 3 - South Miami Heights -->
+                    <div class="tarjeta-tienda">
+                        <h3 class="tienda-nombre">Familia Market - South Miami Heights</h3>
+                        <p class="tienda-direccion">📍 11545 SW 186th St, Miami, FL 33157</p>
+                        <div class="tienda-horario">
+                            <strong>Horario de Atención:</strong><br>
+                            Lunes a Domingo: 8:00 AM - 2:00 AM
+                        </div>
+                        <div class="tienda-botones">
+                            <a href="https://www.google.com/maps?q=25.587899,-80.374533" class="btn-tienda" target="_blank">
+                                <span>🗺️</span> Cómo Llegar
+                            </a>
+                            <button class="btn-tienda" onclick="mostrarPagina('especiales')">
+                                <span>🎯</span> Especiales
+                            </button>
+                            <button class="btn-tienda" onclick="mostrarSobreTienda('sobre-tienda3')">
+                                <span>🏪</span> Sobre Esta Tienda
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ESPECIALES / PROMOCIONES -->
+        <section id="especiales" class="pagina">
+            <div class="pagina-interna">
+                <button class="btn-atras" onclick="volverAtras()">← Atrás</button>
+                <h1 class="titulo-pagina">Especiales y Promociones</h1>
+                
+                <!-- SLIDER ESPECIALES 70vh -->
+                <div class="slider-portada" id="slider-especiales">
+                    <div class="slider-track">
+                        <div class="slide activo">
+                            <img src="images/especiales/especiales-portada-1.webp" alt="Ofertas exclusivas de Familia Market" class="slide-img">
+                        </div>
+                        <div class="slide">
+                            <img src="images/especiales/especiales-portada-2.webp" alt="Productos en promoción esta semana" class="slide-img">
+                        </div>
+                        <div class="slide">
+                            <img src="images/especiales/especiales-portada-3.webp" alt="Descuentos increíbles para tu familia" class="slide-img">
+                        </div>
+                    </div>
+                    <div class="slider-controls">
+                        <button class="slider-btn prev">‹</button>
+                        <button class="slider-btn next">›</button>
+                    </div>
+                </div>
+
+                <div class="texto-categoria">
+                    <h2>¡Aprovecha Nuestras Ofertas Exclusivas!</h2>
+                    <p class="descripcion-categoria">Cada semana seleccionamos cuidadosamente productos para ofrecerte los mejores precios y promociones especiales. En Familia Market entendemos lo importante que es tu presupuesto familiar, por eso trabajamos para traerte descuentos reales en productos de calidad.</p>
+                    <p style="margin: 20px 0; font-size: 1.2rem; color: var(--color-rojo); font-weight: 600;">
+                        🎯 <strong>Beneficios Exclusivos:</strong> Precios que hacen la diferencia + Calidad garantizada + Atención que entiende tus necesidades
+                    </p>
+                    <p style="font-style: italic; color: var(--color-texto-suave); margin-bottom: 25px;">
+                        "No esperes más para hacer que tu dinero rinda. Estas ofertas son por tiempo limitado y están diseñadas pensando en tu bienestar económico."
+                    </p>
+                    <button class="btn-donde-encontrarnos" onclick="mostrarPagina('mis-tiendas')">¡Quiero Aprovechar Estas Ofertas!</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- CONTACTO -->
+        <section id="contacto" class="pagina">
+            <div class="pagina-interna">
+                <button class="btn-atras" onclick="volverAtras()">← Atrás</button>
+                <h1 class="titulo-pagina">Contáctanos</h1>
+                
+                <div class="texto-categoria">
+                    <h2>Síguenos en Nuestras Redes Sociales</h2>
+                    <p>Mantente al día con nuestras promociones, nuevos productos y eventos especiales. ¡Te esperamos en nuestras redes!</p>
+                    
+                    <div class="redes-sociales">
+                        <a href="https://www.instagram.com/lafamiliamarket_llc/" class="red-social" target="_blank">
+                            <img src="images/contacto/instagram-icon.png" alt="Instagram" class="icono-red-social">
+                        </a>
+                        <a href="https://www.tiktok.com/@shadyibzie1" class="red-social" target="_blank">
+                            <img src="images/contacto/tiktok-icon.png" alt="TikTok" class="icono-red-social">
+                        </a>
+                    </div>
+                    
+                    <p style="margin-top: 30px; font-size: 1.1rem;">
+                        <strong>Instagram:</strong> @lafamiliamarket_llc<br>
+                        <strong>TikTok:</strong> @shadyibzie1
+                    </p>
+                    <p style="margin-top: 20px; color: var(--color-texto-suave); font-style: italic;">
+                        ¡Etiquétanos en tus compras y comparte tu experiencia en Familia Market!
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- CONTENEDOR PARA CATEGORÍAS DINÁMICAS -->
+        <div id="categorias-container"></div>
+
+        <!-- CONTENEDOR PARA SOBRE TIENDA DINÁMICO -->
+        <div id="sobre-tienda-container"></div>
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <div class="footer-contenido">
+            <div class="footer-seccion">
+                <h3>Familia Market</h3>
+                <p>Tu tienda de conveniencia de confianza, donde la calidad se encuentra con el servicio excepcional.</p>
+            </div>
+            <div class="footer-seccion">
+                <h3>Enlaces Rápidos</h3>
+                <ul class="footer-links">
+                    <li class="footer-link"><a onclick="mostrarPagina('inicio')">Inicio</a></li>
+                    <li class="footer-link"><a onclick="mostrarPagina('quienes-somos')">Quiénes Somos</a></li>
+                    <li class="footer-link"><a onclick="mostrarPagina('mis-tiendas')">Nuestras Tiendas</a></li>
+                    <li class="footer-link"><a onclick="mostrarPagina('especiales')">Promociones</a></li>
+                </ul>
+            </div>
+            <div class="footer-seccion">
+                <h3>Servicios</h3>
+                <ul class="footer-links">
+                    <li class="footer-link"><a href="#">Transferencias RIA</a></li>
+                    <li class="footer-link"><a href="#">Recargas BOSS Revolution</a></li>
+                    <li class="footer-link"><a href="#">Lotería de Florida</a></li>
+                    <li class="footer-link"><a href="#">Pagos con EBT</a></li>
+                </ul>
+            </div>
+            <div class="footer-seccion">
+                <h3>Contacto</h3>
+                <div style="display: flex; gap: 15px; margin-top: 15px; justify-content: center;">
+                    <a href="https://www.instagram.com/lafamiliamarket_llc/" target="_blank" style="color: var(--color-blanco); font-size: 1.5rem;">
+                        <img src="images/contacto/instagram-icon.png" alt="Instagram" style="width: 30px; height: 30px;">
+                    </a>
+                    <a href="https://www.tiktok.com/@shadyibzie1" target="_blank" style="color: var(--color-blanco); font-size: 1.5rem;">
+                        <img src="images/contacto/tiktok-icon.png" alt="TikTok" style="width: 30px; height: 30px;">
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="copyright">
+            <p>&copy; 2025 Familia Market. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+
+    <!-- OPENSTREETMAP JS - 100% GRATIS -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+    <script>
+        // SISTEMA DE HISTORIAL DE NAVEGACIÓN
+        let historialNavegacion = [];
+        let posicionesScroll = {};
+
+        // VARIABLES GLOBALES PARA CONTROL DE SCROLL Y PÁGINA ACTIVA
+        let currentPage = 'inicio';
+
+        // CONFIGURACIÓN COMPLETA DE CATEGORÍAS
+        const categorias = {
+            'abarrotes': {
+                titulo: 'Abarrotes',
+                imagenes: ['abarrotes-1', 'abarrotes-2', 'abarrotes-3', 'abarrotes-4'],
+                descripcion: 'En Familia Market entendemos que la calidad comienza con los ingredientes. Por eso seleccionamos cuidadosamente cada producto de abarrotes para garantizar frescura y sabor en tu mesa. Desde los granos básicos hasta las especias que dan vida a tus recetas familiares.'
+            },
+            'electronica': {
+                titulo: 'Electrónica', 
+                imagenes: ['electronica-1', 'electronica-2', 'electronica-3', 'electronica-4'],
+                descripcion: 'Mantente conectado con la mejor tecnología. En Familia Market encuentras desde cables y accesorios hasta dispositivos esenciales que simplifican tu vida diaria. Calidad garantizada y precios que respetan tu bolsillo.'
+            },
+            'ferreteria': {
+                titulo: 'Ferretería',
+                imagenes: ['ferreteria-1', 'ferreteria-2', 'ferreteria-3', 'ferreteria-4'],
+                descripcion: 'Todo lo que necesitas para tus proyectos de hogar y reparaciones. Herramientas confiables, materiales duraderos y el asesoramiento que necesitas para hacer realidad tus ideas. En Familia Market, tu proyecto es nuestro proyecto.'
+            },
+            'bebidas': {
+                titulo: 'Bebidas',
+                imagenes: ['bebidas-1', 'bebidas-2', 'bebidas-3', 'bebidas-4'],
+                descripcion: 'Desde refrescantes bebidas para el día a día hasta selecciones especiales para tus celebraciones. Encuentra la bebida perfecta para cada momento, siempre con responsabilidad y variedad que sorprende.'
+            },
+            'comestibles': {
+                titulo: 'Comestibles',
+                imagenes: ['comestibles-1', 'comestibles-2', 'comestibles-3', 'comestibles-4'],
+                descripcion: 'Los alimentos más frescos y deliciosos para tu familia. Seleccionamos cuidadosamente cada producto para garantizar sabor y nutrición en cada bocado. Desde frutas y verduras hasta productos listos para disfrutar.'
+            },
+            'snacks': {
+                titulo: 'Snacks',
+                imagenes: ['snacks-1', 'snacks-2', 'snacks-3', 'snacks-4'],
+                descripcion: 'Para esos momentos especiales o el antojo del día, tenemos la mejor selección de snacks nacionales e internacionales. Encuentra desde tus favoritos de la infancia hasta nuevas experiencias de sabor.'
+            },
+            'higiene': {
+                titulo: 'Higiene y Cuidado Personal',
+                imagenes: ['higiene-1', 'higiene-2', 'higiene-3', 'higiene-4'],
+                descripcion: 'Tu bienestar es nuestra prioridad. Ofrecemos una completa gama de productos de higiene personal y cuidado que cuidan de ti y tu familia. Calidad y confianza en cada producto.'
+            },
+            'hogar': {
+                titulo: 'Hogar',
+                imagenes: ['hogar-1', 'hogar-2', 'hogar-3', 'hogar-4'],
+                descripcion: 'Todo lo que necesitas para hacer de tu hogar un espacio cómodo y acogedor. Desde productos de limpieza hasta decoración, tenemos lo esencial para mantener tu casa impecable.'
+            },
+            'promociones': {
+                titulo: 'Promociones / Especiales',
+                imagenes: ['promociones-1', 'promociones-2', 'promociones-3', 'promociones-4'],
+                descripcion: '¡Aprovecha nuestras ofertas exclusivas! En Familia Market siempre tenemos promociones especiales para que ahorres mientras disfrutas de productos de calidad. Visítanos frecuentemente y descubre nuevas oportunidades cada semana.'
+            },
+            'otros': {
+                titulo: 'Otros Productos Destacados',
+                imagenes: ['otros-1', 'otros-2', 'otros-3', 'otros-4'],
+                descripcion: 'Descubre nuestra selección especial de productos únicos y destacados. Siempre estamos incorporando novedades para sorprenderte y ofrecerte más opciones para tu día a día.'
+            }
+        };
+
+        // CONFIGURACIÓN SOBRE TIENDA
+        const sobreTiendas = {
+            'sobre-tienda1': {
+                titulo: 'Familia Market - Miami Gardens',
+                imagenes: ['sobre-tienda1-portada-1', 'sobre-tienda1-portada-2', 'sobre-tienda1-portada-3'],
+                descripcion: 'Nuestra tienda en Miami Gardens es mucho más que un establecimiento comercial: es el corazón de la comunidad. Con años de experiencia sirviendo a las familias del área, nos hemos convertido en el lugar de confianza donde encuentras desde los productos básicos hasta servicios internacionales que conectan a tu familia con el mundo. Nuestro equipo bilingüe está siempre listo para ayudarte con una sonrisa y el conocimiento que necesitas.'
+            },
+            'sobre-tienda2': {
+                titulo: 'Familia Market - Allapattah',
+                imagenes: ['sobre-tienda2-portada-1', 'sobre-tienda2-portada-2', 'sobre-tienda2-portada-3'],
+                descripcion: 'Ubicada en el vibrante corazón de Allapattah, nuestra tienda se especializa en ofrecer una amplia variedad de productos y servicios para toda la familia. Pero eso no es todo: también ofrecemos todos los servicios internacionales que necesitas para mantenerte conectado con tus seres queridos. Ven y descubre por qué somos la opción preferida de los que buscan calidad y servicio excepcional.'
+            },
+            'sobre-tienda3': {
+                titulo: 'Familia Market - South Miami Heights',
+                imagenes: ['sobre-tienda3-portada-1', 'sobre-tienda3-portada-2', 'sobre-tienda3-portada-3'],
+                descripcion: 'En South Miami Heights, nuestra tienda se destaca por su amplio estacionamiento, fácil acceso y la mejor selección de productos de higiene personal y cuidado del hogar. Somos el destino ideal para las familias que valoran la comodidad, la variedad y ese trato personalizado que nos caracteriza. Con años de experiencia sirviendo a la comunidad, sabemos exactamente lo que tu familia necesita y nos enorgullece ofrecértelo.'
+            }
+        };
+
+        // INICIALIZACIÓN DEL MAPA OPENSTREETMAP - 100% GRATIS
+        function inicializarMapa() {
+            const mapaContainer = document.getElementById('mapa-tiendas');
+            if (!mapaContainer) return;
+
+            // Coordenadas de las tiendas
+            const tiendas = [
+                {
+                    nombre: 'Familia Market - Miami Gardens',
+                    lat: 25.948696,
+                    lng: -80.244805,
+                    direccion: '19139 NW 27th Ave, Miami, FL 33114',
+                    enlace: 'https://maps.app.goo.gl/fS89V83GGuPCXW3H6?g_st=awb'
+                },
+                {
+                    nombre: 'Familia Market - Allapattah',
+                    lat: 25.814667,
+                    lng: -80.240201,
+                    direccion: '2412 NW 27th Ave, Miami, FL 33142',
+                    enlace: 'https://www.google.com/maps?q=25.814667,-80.240201'
+                },
+                {
+                    nombre: 'Familia Market - South Miami Heights',
+                    lat: 25.587899,
+                    lng: -80.374533,
+                    direccion: '11545 SW 186th St, Miami, FL 33157',
+                    enlace: 'https://www.google.com/maps?q=25.587899,-80.374533'
+                }
+            ];
+
+            try {
+                // Inicializar mapa con ZOOM MÁS CERCANO para ver mejor los 3 puntos
+                const mapa = L.map('mapa-tiendas').setView([25.7617, -80.1918], 10);
+
+                // Agregar capa de OpenStreetMap (100% gratis)
+                L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                    attribution: '© OpenStreetMap contributors',
+                    maxZoom: 18,
+                }).addTo(mapa);
+
+                // CREAR ICONO ROJO COMO GOOGLE MAPS
+                const iconoGoogleRojo = L.divIcon({
+                    html: `
+                        <div style="
+                            background-color: #ea4335;
+                            width: 20px;
+                            height: 20px;
+                            border-radius: 50% 50% 50% 0;
+                            transform: rotate(-45deg);
+                            border: 2px solid white;
+                            box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+                            position: relative;
+                            cursor: pointer;
+                        ">
+                            <div style="
+                                position: absolute;
+                                top: 50%;
+                                left: 50%;
+                                transform: translate(-50%, -50%) rotate(45deg);
+                                width: 6px;
+                                height: 6px;
+                                background: white;
+                                border-radius: 50%;
+                            "></div>
+                        </div>
+                    `,
+                    className: 'icono-google-maps',
+                    iconSize: [20, 20],
+                    iconAnchor: [10, 20]
+                });
+
+                // Agregar marcadores para cada tienda
+                tiendas.forEach((tienda, index) => {
+                    const marcador = L.marker([tienda.lat, tienda.lng], { 
+                        icon: iconoGoogleRojo 
+                    }).addTo(mapa);
+
+                    // Popup con información de la tienda
+                    marcador.bindPopup(`
+                        <div style="padding: 15px; min-width: 250px; font-family: 'Inter', sans-serif;">
+                            <h3 style="margin: 0 0 10px 0; color: #ed1c24; font-size: 16px; font-weight: 700;">${tienda.nombre}</h3>
+                            <p style="margin: 0 0 8px 0; font-size: 14px; color: #666; line-height: 1.4;">${tienda.direccion}</p>
+                            <a href="${tienda.enlace}" target="_blank" style="display: inline-block; background: #ed1c24; color: white; padding: 10px 20px; text-decoration: none; border-radius: 8px; font-size: 14px; font-weight: 600; margin-top: 8px; transition: all 0.3s;">
+                                🗺️ Cómo Llegar en Google Maps
+                            </a>
+                        </div>
+                    `);
+
+                    // Al hacer clic en el marcador, abrir Google Maps
+                    marcador.on('click', function() {
+                        window.open(tienda.enlace, '_blank');
+                    });
+                });
+
+            } catch (error) {
+                console.error('Error al cargar el mapa:', error);
+                // Fallback si hay error
+                mapaContainer.innerHTML = `
+                    <div style="text-align: center; padding: 40px; color: #666;">
+                        <h3>🗺️ Mapa de Nuestras Tiendas</h3>
+                        <p>Las ubicaciones están cargadas correctamente</p>
+                        <p><small>Miami Gardens, Allapattah, South Miami Heights</small></p>
+                    </div>
+                `;
+            }
+        }
+
+        // SISTEMA MEJORADO DE SLIDERS
+        class SliderManager {
+            constructor(sliderContainer) {
+                this.slider = sliderContainer;
+                this.track = sliderContainer.querySelector('.slider-track');
+                this.slides = sliderContainer.querySelectorAll('.slide');
+                this.prevBtn = sliderContainer.querySelector('.slider-btn.prev');
+                this.nextBtn = sliderContainer.querySelector('.slider-btn.next');
+                this.currentSlide = 0;
+                this.autoPlayInterval = null;
+                
+                this.init();
+            }
+            
+            init() {
+                this.createIndicators();
+                
+                if (this.prevBtn) this.prevBtn.addEventListener('click', () => this.prev());
+                if (this.nextBtn) this.nextBtn.addEventListener('click', () => this.next());
+                
+                if (this.slides.length > 1) {
+                    this.startAutoPlay();
+                    
+                    this.slider.addEventListener('mouseenter', () => this.stopAutoPlay());
+                    this.slider.addEventListener('mouseleave', () => this.startAutoPlay());
+                }
+            }
+            
+            createIndicators() {
+                const indicatorsContainer = document.createElement('div');
+                indicatorsContainer.className = 'slider-indicators';
+                
+                for (let i = 0; i < this.slides.length; i++) {
+                    const dot = document.createElement('div');
+                    dot.className = `slider-dot ${i === 0 ? 'activo' : ''}`;
+                    dot.addEventListener('click', () => this.goToSlide(i));
+                    indicatorsContainer.appendChild(dot);
+                }
+                
+                this.slider.appendChild(indicatorsContainer);
+                this.indicators = indicatorsContainer.querySelectorAll('.slider-dot');
+            }
+            
+            updateIndicators() {
+                this.indicators.forEach((dot, index) => {
+                    dot.classList.toggle('activo', index === this.currentSlide);
+                });
+            }
+            
+            goToSlide(index) {
+                this.slides[this.currentSlide].classList.add('saliendo');
+                
+                setTimeout(() => {
+                    this.slides.forEach(slide => {
+                        slide.classList.remove('activo', 'saliendo');
+                    });
+                    
+                    this.currentSlide = (index + this.slides.length) % this.slides.length;
+                    this.slides[this.currentSlide].classList.add('activo');
+                    this.updateIndicators();
+                }, 300);
+            }
+            
+            next() {
+                this.goToSlide(this.currentSlide + 1);
+            }
+            
+            prev() {
+                this.goToSlide(this.currentSlide - 1);
+            }
+            
+            startAutoPlay() {
+                this.stopAutoPlay();
+                this.autoPlayInterval = setInterval(() => this.next(), 5000);
+            }
+            
+            stopAutoPlay() {
+                if (this.autoPlayInterval) {
+                    clearInterval(this.autoPlayInterval);
+                    this.autoPlayInterval = null;
+                }
+            }
+        }
+
+        // FUNCIONES PRINCIPALES MEJORADAS CON HISTORIAL
+        function guardarPosicionScroll() {
+            posicionesScroll[currentPage] = window.pageYOffset || document.documentElement.scrollTop;
+        }
+
+        function restaurarPosicionScroll(paginaId) {
+            const posicion = posicionesScroll[paginaId] || 0;
+            window.scrollTo(0, posicion);
+        }
+
+        function actualizarMenuActivo(paginaId) {
+            document.querySelectorAll('.menu-link').forEach(link => {
+                link.classList.remove('activo');
+            });
+            
+            const menuItem = document.querySelector(`.menu-link[onclick="mostrarPagina('${paginaId}')"]`);
+            if (menuItem) {
+                menuItem.classList.add('activo');
+            }
+        }
+
+        function mostrarPagina(paginaId) {
+            // Guardar posición actual antes de cambiar
+            guardarPosicionScroll();
+            
+            // Agregar al historial (excepto si es la misma página)
+            if (paginaId !== currentPage) {
+                historialNavegacion.push(currentPage);
+            }
+            
+            currentPage = paginaId;
+            
+            document.querySelectorAll('.pagina').forEach(pagina => {
+                pagina.classList.remove('activa');
+            });
+            
+            document.getElementById('categorias-container').innerHTML = '';
+            document.getElementById('sobre-tienda-container').innerHTML = '';
+            
+            document.getElementById(paginaId).classList.add('activa');
+            actualizarMenuActivo(paginaId);
+            
+            setTimeout(() => {
+                inicializarSlidersEnPagina(paginaId);
+                restaurarPosicionScroll(paginaId);
+                
+                // Inicializar mapa cuando se muestra la página de tiendas
+                if (paginaId === 'mis-tiendas') {
+                    setTimeout(() => {
+                        inicializarMapa();
+                    }, 300);
+                }
+            }, 100);
+        }
+
+        function volverAtras() {
+            if (historialNavegacion.length > 0) {
+                const paginaAnterior = historialNavegacion.pop();
+                mostrarPagina(paginaAnterior);
+            } else {
+                // Si no hay historial, ir al inicio
+                mostrarPagina('inicio');
+            }
+        }
+
+        function mostrarCategoria(categoriaId) {
+            guardarPosicionScroll();
+            historialNavegacion.push(currentPage);
+            
+            const categoria = categorias[categoriaId];
+            if (!categoria) return;
+
+            const html = `
+                <section id="categoria-${categoriaId}" class="pagina activa">
+                    <div class="pagina-interna">
+                        <button class="btn-atras" onclick="volverAtras()">← Atrás</button>
+                        <h1 class="titulo-pagina">${categoria.titulo}</h1>
+                        
+                        <div class="grid-imagenes">
+                            <div class="fila-completa">
+                                <img src="images/categorias/${categoria.imagenes[0]}.webp" alt="${categoria.titulo}" class="imagen-grande">
+                            </div>
+                            <div class="fila-mitad">
+                                <img src="images/categorias/${categoria.imagenes[1]}.webp" alt="${categoria.titulo}" class="imagen-pequena">
+                                <img src="images/categorias/${categoria.imagenes[2]}.webp" alt="${categoria.titulo}" class="imagen-pequena">
+                            </div>
+                            <div class="fila-completa">
+                                <img src="images/categorias/${categoria.imagenes[3]}.webp" alt="${categoria.titulo}" class="imagen-grande">
+                            </div>
+                        </div>
+
+                        <div class="texto-categoria">
+                            <h2>Todo en ${categoria.titulo}</h2>
+                            <p class="descripcion-categoria">${categoria.descripcion}</p>
+                            <p style="margin-top: 20px; font-style: italic; color: var(--color-texto-suave);">
+                                "Calidad que se nota, precios que se agradecen"
+                            </p>
+                            <button class="btn-donde-encontrarnos" onclick="mostrarPagina('mis-tiendas')">¿Dónde Encontrarnos?</button>
+                        </div>
+                    </div>
+                </section>
+            `;
+
+            document.querySelectorAll('.pagina').forEach(pagina => {
+                pagina.classList.remove('activa');
+            });
+            
+            document.getElementById('categorias-container').innerHTML = html;
+            currentPage = `categoria-${categoriaId}`;
+            window.scrollTo(0, 0);
+        }
+
+        function mostrarSobreTienda(tiendaId) {
+            guardarPosicionScroll();
+            historialNavegacion.push(currentPage);
+            
+            const tienda = sobreTiendas[tiendaId];
+            if (!tienda) return;
+
+            const html = `
+                <section id="${tiendaId}" class="pagina activa">
+                    <div class="pagina-interna">
+                        <button class="btn-atras" onclick="volverAtras()">← Atrás</button>
+                        <h1 class="titulo-pagina">${tienda.titulo}</h1>
+                        
+                        <div class="slider-portada" id="slider-${tiendaId}">
+                            <div class="slider-track">
+                                <div class="slide activo">
+                                    <img src="images/sobre-tienda/${tienda.imagenes[0]}.webp" alt="${tienda.titulo}" class="slide-img">
+                                </div>
+                                <div class="slide">
+                                    <img src="images/sobre-tienda/${tienda.imagenes[1]}.webp" alt="${tienda.titulo}" class="slide-img">
+                                </div>
+                                <div class="slide">
+                                    <img src="images/sobre-tienda/${tienda.imagenes[2]}.webp" alt="${tienda.titulo}" class="slide-img">
+                                </div>
+                            </div>
+                            <div class="slider-controls">
+                                <button class="slider-btn prev">‹</button>
+                                <button class="slider-btn next">›</button>
+                            </div>
+                        </div>
+
+                        <div class="seccion-texto">
+                            <h2>Conoce Nuestra Tienda</h2>
+                            <p>${tienda.descripcion}</p>
+                            <p style="margin-top: 20px; font-weight: 600; color: var(--color-rojo);">
+                                ¡Te esperamos para que experimentes personalmente por qué somos diferentes!
+                            </p>
+                        </div>
+                    </div>
+                </section>
+            `;
+
+            document.querySelectorAll('.pagina').forEach(pagina => {
+                pagina.classList.remove('activa');
+            });
+            
+            document.getElementById('sobre-tienda-container').innerHTML = html;
+            currentPage = tiendaId;
+            
+            setTimeout(() => {
+                const sliderContainer = document.querySelector(`#slider-${tiendaId}`);
+                if (sliderContainer) {
+                    new SliderManager(sliderContainer);
+                }
+            }, 100);
+            
+            window.scrollTo(0, 0);
+        }
+
+        // INICIALIZACIÓN DE SLIDERS
+        function inicializarSlidersEnPagina(paginaId) {
+            const pagina = document.getElementById(paginaId);
+            if (!pagina) return;
+            
+            const sliders = pagina.querySelectorAll('.slider-portada');
+            sliders.forEach(slider => {
+                new SliderManager(slider);
+            });
+        }
+
+        // INICIALIZACIÓN AL CARGAR LA PÁGINA
+        document.addEventListener('DOMContentLoaded', function() {
+            inicializarSlidersEnPagina('inicio');
+            actualizarMenuActivo('inicio');
+            
+            // Inicializar mapa si estamos en la página de tiendas al cargar
+            if (currentPage === 'mis-tiendas') {
+                setTimeout(() => {
+                    inicializarMapa();
+                }, 500);
+            }
+            
+            // Efectos hover mejorados
+            const cards = document.querySelectorAll('.beneficio, .tarjeta-tienda, .boton-circular');
+            cards.forEach(card => {
+                card.addEventListener('mouseenter', function() {
+                    this.style.transform = this.classList.contains('boton-circular') 
+                        ? 'scale(1.15) rotate(5deg)' 
+                        : 'translateY(-8px)';
+                });
+                card.addEventListener('mouseleave', function() {
+                    this.style.transform = this.classList.contains('boton-circular') 
+                        ? 'scale(1) rotate(0)' 
+                        : 'translateY(0)';
+                });
+            });
+        });
+    </script>
+</body>
+</html>
