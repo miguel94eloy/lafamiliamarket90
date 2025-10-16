@@ -262,6 +262,14 @@
             object-fit: cover;
         }
 
+        /* IMÁGENES ESPECÍFICAS PARA DISPOSITIVO */
+        .img-pc {
+            display: block;
+        }
+        .img-movil {
+            display: none;
+        }
+
         .slider-controls {
             position: absolute;
             top: 50%;
@@ -956,6 +964,279 @@
             font-size: 0.9rem;
         }
 
+        /* ================================================ */
+        /* ESTILOS ESPECÍFICOS PARA MÓVIL */
+        /* ================================================ */
+
+        /* HEADER MÓVIL COMPACTO */
+        @media (max-width: 768px) {
+            .header-principal {
+                padding: 8px 5% !important;
+                height: 60px !important;
+                min-height: 60px !important;
+            }
+
+            .logo-principal {
+                height: 40px !important;
+            }
+
+            .logos-secundarios {
+                display: none !important;
+            }
+
+            .btn-idioma {
+                padding: 8px 15px !important;
+                font-size: 0.8rem !important;
+                white-space: nowrap;
+            }
+        }
+
+        /* MENÚ ROJO MÓVIL COMPACTO */
+        @media (max-width: 768px) {
+            .menu-navegacion {
+                padding: 0 !important;
+                top: 60px !important;
+                height: 50px !important;
+                min-height: 50px !important;
+            }
+
+            .menu-lista {
+                display: flex !important;
+                justify-content: space-around !important;
+                align-items: center !important;
+                height: 100% !important;
+                padding: 0 10px !important;
+            }
+
+            .menu-item {
+                flex: 1 !important;
+                text-align: center !important;
+                height: 100% !important;
+            }
+
+            .menu-link {
+                padding: 12px 8px !important;
+                font-size: 0.8rem !important;
+                height: 100% !important;
+                display: flex !important;
+                align-items: center !important;
+                justify-content: center !important;
+                white-space: nowrap !important;
+                min-width: 0 !important;
+            }
+
+            .menu-link::after {
+                display: none !important;
+            }
+
+            /* OCULTAR DROPDOWN ORIGINAL EN MÓVIL */
+            .dropdown {
+                display: none !important;
+            }
+
+            /* MENÚS DESPLEGABLES MÓVIL */
+            .mobile-dropdown {
+                position: fixed;
+                top: 110px;
+                left: 0;
+                right: 0;
+                background: rgba(255,255,255,0.98);
+                backdrop-filter: blur(20px);
+                z-index: 1002;
+                max-height: 0;
+                overflow: hidden;
+                transition: max-height 0.4s ease;
+                box-shadow: 0 5px 25px rgba(0,0,0,0.15);
+            }
+
+            .mobile-dropdown.abierto {
+                max-height: 400px;
+            }
+
+            .mobile-dropdown-content {
+                padding: 20px;
+            }
+
+            .mobile-dropdown-link {
+                display: block;
+                padding: 15px 20px;
+                color: var(--color-negro);
+                text-decoration: none;
+                border-bottom: 1px solid var(--color-bordes);
+                font-weight: 500;
+                transition: var(--transicion);
+                cursor: pointer;
+            }
+
+            .mobile-dropdown-link:last-child {
+                border-bottom: none;
+            }
+
+            .mobile-dropdown-link:hover {
+                background: var(--color-gris-claro);
+                color: var(--color-rojo);
+                padding-left: 25px;
+            }
+        }
+
+        /* PORTADAS MÓVIL */
+        @media (max-width: 768px) {
+            .img-pc {
+                display: none !important;
+            }
+            .img-movil {
+                display: block !important;
+            }
+
+            .slider-portada {
+                height: 40vh !important;
+            }
+
+            #slider-especiales .slider-portada,
+            #sobre-tienda-container .slider-portada {
+                height: 50vh !important;
+            }
+        }
+
+        /* BANNER LOGOS MÓVIL */
+        @media (max-width: 768px) {
+            .logos-principales {
+                padding: 30px 5% !important;
+                height: auto !important;
+                min-height: 80px !important;
+            }
+
+            .logos-grid {
+                gap: 20px !important;
+                overflow-x: auto !important;
+                padding: 10px 0 !important;
+                justify-content: flex-start !important;
+                scroll-snap-type: x mandatory !important;
+                -webkit-overflow-scrolling: touch !important;
+            }
+
+            .logo-item {
+                min-width: 100px !important;
+                scroll-snap-align: start !important;
+                flex-shrink: 0 !important;
+                padding: 5px !important;
+            }
+
+            .logo-grande {
+                height: 35px !important;
+            }
+
+            .logo-item p {
+                font-size: 0.65rem !important;
+                margin-top: 5px !important;
+            }
+        }
+
+        /* TARJETAS TIENDAS MÓVIL */
+        @media (max-width: 768px) {
+            .tarjetas-tiendas {
+                display: flex !important;
+                flex-direction: column !important;
+                gap: 20px !important;
+                overflow-x: visible !important;
+            }
+
+            .tarjeta-tienda {
+                min-width: auto !important;
+                width: 100% !important;
+                scroll-snap-align: none !important;
+            }
+        }
+
+        /* FOOTER MÓVIL */
+        @media (max-width: 768px) {
+            .footer {
+                padding: 30px 5% !important;
+                margin-top: 40px !important;
+            }
+
+            .footer-contenido {
+                grid-template-columns: 1fr !important;
+                gap: 30px !important;
+                text-align: center !important;
+            }
+
+            .footer-seccion h3 {
+                font-size: 1.1rem !important;
+                margin-bottom: 15px !important;
+            }
+
+            .footer-link {
+                margin-bottom: 8px !important;
+            }
+
+            .footer-link a {
+                font-size: 0.85rem !important;
+                padding: 3px 0 !important;
+            }
+
+            .copyright {
+                margin-top: 30px !important;
+                padding-top: 20px !important;
+                font-size: 0.8rem !important;
+            }
+
+            /* ESTRUCTURA 2 COLUMNAS PARA FOOTER */
+            .footer-grid-mobile {
+                display: grid !important;
+                grid-template-columns: 1fr 1fr !important;
+                gap: 30px !important;
+                margin-top: 20px !important;
+            }
+
+            .footer-brand {
+                grid-column: 1 / -1 !important;
+                text-align: center !important;
+                margin-bottom: 20px !important;
+            }
+        }
+
+        /* BOTONES CIRCULARES MÓVIL */
+        @media (max-width: 768px) {
+            .contenedor-circulos {
+                grid-template-columns: repeat(3, 1fr) !important;
+                gap: 15px !important;
+            }
+
+            .boton-circular {
+                width: 100px !important;
+                height: 100px !important;
+            }
+
+            .texto-circulo {
+                font-size: 0.75rem !important;
+            }
+
+            /* REORGANIZACIÓN GRID MÓVIL */
+            .item-circulo:nth-child(-n+10) {
+                grid-column: auto !important;
+            }
+        }
+
+        /* TEXTOS MÓVIL */
+        @media (max-width: 768px) {
+            .titulo-principal {
+                font-size: 2rem !important;
+            }
+
+            .titulo-pagina {
+                font-size: 2rem !important;
+            }
+
+            .titulo-seccion {
+                font-size: 1.8rem !important;
+            }
+
+            .subtitulo {
+                font-size: 1.1rem !important;
+            }
+        }
+
         /* RESPONSIVE COMPLETO OPTIMIZADO */
         @media (max-width: 1200px) {
             .contenedor-circulos {
@@ -980,77 +1261,12 @@
 
         @media (max-width: 768px) {
             .header-principal {
-                flex-direction: column;
-                gap: 15px;
-                padding: 15px 5%;
-            }
-            
-            .logos-secundarios {
-                gap: 10px;
-                flex-wrap: wrap;
-                justify-content: center;
-            }
-            
-            .logo-secundario {
-                height: 25px;
-            }
-            
-            .menu-lista {
-                flex-direction: column;
-            }
-            
-            .menu-link {
-                padding: 15px;
-                text-align: center;
-                border-bottom: 1px solid rgba(255,255,255,0.1);
-            }
-            
-            .dropdown {
-                position: static;
-                display: none;
-                box-shadow: none;
-                border-radius: 0;
-            }
-            
-            .menu-item:hover .dropdown {
-                display: block;
-            }
-            
-            .slider-portada {
-                height: 40vh;
-            }
-            
-            #slider-especiales .slider-portada,
-            #sobre-tienda-container .slider-portada {
-                height: 50vh;
-            }
-            
-            .titulo-principal {
-                font-size: 2.2rem;
-            }
-            
-            .titulo-pagina {
-                font-size: 2.2rem;
+                flex-direction: row !important;
+                justify-content: space-between !important;
             }
             
             .fila-mitad {
                 grid-template-columns: 1fr;
-            }
-            
-            /* TARJETAS TIENDAS EN FILA HORIZONTAL MOBILE */
-            .tarjetas-tiendas {
-                display: flex;
-                overflow-x: auto;
-                gap: 20px;
-                padding: 10px 0;
-                scroll-snap-type: x mandatory;
-                -webkit-overflow-scrolling: touch;
-            }
-            
-            .tarjeta-tienda {
-                min-width: 280px;
-                scroll-snap-align: start;
-                flex-shrink: 0;
             }
             
             .redes-sociales {
@@ -1080,46 +1296,6 @@
                 width: 6px;
                 height: 6px;
             }
-            
-            /* BOTONES CIRCULARES RESPONSIVE */
-            .contenedor-circulos {
-                grid-template-columns: repeat(2, 1fr);
-                gap: 15px;
-            }
-            
-            .boton-circular {
-                width: 120px;
-                height: 120px;
-            }
-            
-            .texto-circulo {
-                font-size: 0.75rem;
-            }
-            
-            /* BANNER LOGOS MOBILE COMPACTO */
-            .logos-grid {
-                gap: 20px;
-                overflow-x: auto;
-                padding: 10px 0;
-                justify-content: flex-start;
-                scroll-snap-type: x mandatory;
-            }
-            
-            .logo-item {
-                min-width: 120px;
-                scroll-snap-align: start;
-                flex-shrink: 0;
-                padding: 10px;
-            }
-            
-            .logo-grande {
-                height: 40px;
-            }
-            
-            .logo-item p {
-                font-size: 0.7rem;
-                margin-top: 5px;
-            }
         }
 
         @media (max-width: 480px) {
@@ -1128,7 +1304,6 @@
             }
             
             .tarjeta-tienda {
-                min-width: 260px;
                 padding: 20px;
             }
             
@@ -1150,7 +1325,6 @@
                 height: 60px;
             }
             
-            /* BOTONES CIRCULARES MOBILE */
             .contenedor-circulos {
                 grid-template-columns: repeat(2, 1fr);
                 gap: 12px;
@@ -1172,27 +1346,13 @@
             .titulo-pagina {
                 font-size: 1.8rem;
             }
-            
-            /* HEADER MÓVIL MÁS COMPACTO */
-            .header-principal {
-                padding: 10px 5%;
-            }
-            
-            .logo-principal {
-                height: 40px;
-            }
-            
-            .btn-idioma {
-                padding: 8px 15px;
-                font-size: 0.8rem;
-            }
         }
     </style>
 </head>
 <body>
     <!-- HEADER PRINCIPAL PREMIUM -->
     <header class="header-principal">
-        <img src="images/header/logo-principal.webp" alt="Familia Market" class="logo-principal" onclick="mostrarPagina('inicio')">
+        <img src="images/header/logo-principal.webp" alt="Familia Market" class="logo-principal" onclick="irAlInicio()">
         <div class="logos-secundarios">
             <img src="images/header/logo-florida-lottery.webp" alt="Florida Lottery" class="logo-secundario">
             <img src="images/header/logo-ria-money.webp" alt="RIA Money Transfer" class="logo-secundario">
@@ -1227,6 +1387,46 @@
         </ul>
     </nav>
 
+    <!-- MENÚ MÓVIL (SOLO SE VE EN MÓVIL) -->
+    <div class="mobile-menu" style="display: none;">
+        <div class="mobile-menu-container">
+            <div class="mobile-menu-item" onclick="toggleMobileDropdown('categorias')">
+                <span>Categorías</span>
+            </div>
+            <div class="mobile-menu-item" onclick="toggleMobileDropdown('menu')">
+                <span>Menú</span>
+            </div>
+            <div class="mobile-menu-item" onclick="mostrarPagina('contacto')">
+                <span>Contacto</span>
+            </div>
+        </div>
+
+        <!-- DROPDOWN CATEGORÍAS MÓVIL -->
+        <div class="mobile-dropdown" id="dropdown-categorias">
+            <div class="mobile-dropdown-content">
+                <a class="mobile-dropdown-link" onclick="mostrarCategoria('abarrotes')">Abarrotes</a>
+                <a class="mobile-dropdown-link" onclick="mostrarCategoria('electronica')">Electrónica</a>
+                <a class="mobile-dropdown-link" onclick="mostrarCategoria('ferreteria')">Ferretería</a>
+                <a class="mobile-dropdown-link" onclick="mostrarCategoria('bebidas')">Bebidas</a>
+                <a class="mobile-dropdown-link" onclick="mostrarCategoria('comestibles')">Comestibles</a>
+                <a class="mobile-dropdown-link" onclick="mostrarCategoria('snacks')">Snacks</a>
+                <a class="mobile-dropdown-link" onclick="mostrarCategoria('higiene')">Higiene</a>
+                <a class="mobile-dropdown-link" onclick="mostrarCategoria('hogar')">Hogar</a>
+                <a class="mobile-dropdown-link" onclick="mostrarCategoria('promociones')">Promociones</a>
+                <a class="mobile-dropdown-link" onclick="mostrarCategoria('otros')">Destacados</a>
+            </div>
+        </div>
+
+        <!-- DROPDOWN MENÚ MÓVIL -->
+        <div class="mobile-dropdown" id="dropdown-menu">
+            <div class="mobile-dropdown-content">
+                <a class="mobile-dropdown-link" onclick="mostrarPagina('quienes-somos')">Quiénes Somos</a>
+                <a class="mobile-dropdown-link" onclick="mostrarPagina('mis-tiendas')">Mis Tiendas</a>
+                <a class="mobile-dropdown-link" onclick="mostrarPagina('especiales')">Especiales</a>
+            </div>
+        </div>
+    </div>
+
     <!-- CONTENIDO PRINCIPAL -->
     <main class="contenido-principal">
         
@@ -1236,13 +1436,16 @@
             <div class="slider-portada" id="slider-inicio">
                 <div class="slider-track">
                     <div class="slide activo">
-                        <img src="images/portada/portada-1.webp" alt="Familia Market - Todo en un solo lugar" class="slide-img">
+                        <img src="images/portada/portada-1.webp" alt="Familia Market - Todo en un solo lugar" class="slide-img img-pc">
+                        <img src="images/portada/Portadas para movil/portada-principal-1.webp" alt="Familia Market - Todo en un solo lugar" class="slide-img img-movil">
                     </div>
                     <div class="slide">
-                        <img src="images/portada/portada-2.webp" alt="Productos frescos y de calidad" class="slide-img">
+                        <img src="images/portada/portada-2.webp" alt="Productos frescos y de calidad" class="slide-img img-pc">
+                        <img src="images/portada/Portadas para movil/portada-principal-2.webp" alt="Productos frescos y de calidad" class="slide-img img-movil">
                     </div>
                     <div class="slide">
-                        <img src="images/portada/portada-3.webp" alt="Servicios internacionales disponibles" class="slide-img">
+                        <img src="images/portada/portada-3.webp" alt="Servicios internacionales disponibles" class="slide-img img-pc">
+                        <img src="images/portada/Portadas para movil/portada-principal-3.webp" alt="Servicios internacionales disponibles" class="slide-img img-movil">
                     </div>
                 </div>
                 <div class="slider-controls">
@@ -1503,13 +1706,12 @@
                 <div class="slider-portada" id="slider-especiales">
                     <div class="slider-track">
                         <div class="slide activo">
-                            <img src="images/especiales/especiales-portada-1.webp" alt="Ofertas exclusivas de Familia Market" class="slide-img">
+                            <img src="images/especiales/especiales-portada-1.webp" alt="Ofertas exclusivas de Familia Market" class="slide-img img-pc">
+                            <img src="images/portada/Portadas para movil/especiales-1.webp" alt="Ofertas exclusivas de Familia Market" class="slide-img img-movil">
                         </div>
                         <div class="slide">
-                            <img src="images/especiales/especiales-portada-2.webp" alt="Productos en promoción esta semana" class="slide-img">
-                        </div>
-                        <div class="slide">
-                            <img src="images/especiales/especiales-portada-3.webp" alt="Descuentos increíbles para tu familia" class="slide-img">
+                            <img src="images/especiales/especiales-portada-2.webp" alt="Productos en promoción esta semana" class="slide-img img-pc">
+                            <img src="images/portada/Portadas para movil/especiales-2.webp" alt="Productos en promoción esta semana" class="slide-img img-movil">
                         </div>
                     </div>
                     <div class="slider-controls">
@@ -1573,37 +1775,40 @@
     <!-- FOOTER -->
     <footer class="footer">
         <div class="footer-contenido">
-            <div class="footer-seccion">
-                <h3>Familia Market</h3>
-                <p>Tu tienda de conveniencia de confianza, donde la calidad se encuentra con el servicio excepcional.</p>
+            <div class="footer-brand" style="grid-column: 1 / -1; text-align: center; margin-bottom: 30px;">
+                <h3 style="color: var(--color-amarillo); font-size: 1.5rem; margin-bottom: 10px;">Familia Market</h3>
+                <p style="color: #ccc; font-size: 0.9rem;">Tu tienda de conveniencia de confianza, donde la calidad se encuentra con el servicio excepcional.</p>
             </div>
-            <div class="footer-seccion">
-                <h3>Enlaces Rápidos</h3>
-                <ul class="footer-links">
-                    <li class="footer-link"><a onclick="mostrarPagina('inicio')">Inicio</a></li>
-                    <li class="footer-link"><a onclick="mostrarPagina('quienes-somos')">Quiénes Somos</a></li>
-                    <li class="footer-link"><a onclick="mostrarPagina('mis-tiendas')">Nuestras Tiendas</a></li>
-                    <li class="footer-link"><a onclick="mostrarPagina('especiales')">Promociones</a></li>
-                </ul>
-            </div>
-            <div class="footer-seccion">
-                <h3>Servicios</h3>
-                <ul class="footer-links">
-                    <li class="footer-link"><a href="#">Transferencias RIA</a></li>
-                    <li class="footer-link"><a href="#">Recargas BOSS Revolution</a></li>
-                    <li class="footer-link"><a href="#">Lotería de Florida</a></li>
-                    <li class="footer-link"><a href="#">Pagos con EBT</a></li>
-                </ul>
-            </div>
-            <div class="footer-seccion">
-                <h3>Contacto</h3>
-                <div style="display: flex; gap: 15px; margin-top: 15px; justify-content: center;">
-                    <a href="https://www.instagram.com/lafamiliamarket_llc/" target="_blank" style="color: var(--color-blanco); font-size: 1.5rem;">
-                        <img src="images/contacto/instagram-icon.png" alt="Instagram" style="width: 30px; height: 30px;">
-                    </a>
-                    <a href="https://www.tiktok.com/@shadyibzie1" target="_blank" style="color: var(--color-blanco); font-size: 1.5rem;">
-                        <img src="images/contacto/tiktok-icon.png" alt="TikTok" style="width: 30px; height: 30px;">
-                    </a>
+            
+            <div class="footer-grid-mobile">
+                <div class="footer-seccion">
+                    <h3>Enlaces Rápidos</h3>
+                    <ul class="footer-links">
+                        <li class="footer-link"><a onclick="mostrarPagina('inicio')">Inicio</a></li>
+                        <li class="footer-link"><a onclick="mostrarPagina('quienes-somos')">Quiénes Somos</a></li>
+                        <li class="footer-link"><a onclick="mostrarPagina('mis-tiendas')">Nuestras Tiendas</a></li>
+                        <li class="footer-link"><a onclick="mostrarPagina('especiales')">Promociones</a></li>
+                    </ul>
+                    
+                    <h3 style="margin-top: 25px;">Contacto</h3>
+                    <div style="display: flex; gap: 15px; margin-top: 15px; justify-content: center;">
+                        <a href="https://www.instagram.com/lafamiliamarket_llc/" target="_blank" style="color: var(--color-blanco);">
+                            <img src="images/contacto/instagram-icon.png" alt="Instagram" style="width: 25px; height: 25px;">
+                        </a>
+                        <a href="https://www.tiktok.com/@shadyibzie1" target="_blank" style="color: var(--color-blanco);">
+                            <img src="images/contacto/tiktok-icon.png" alt="TikTok" style="width: 25px; height: 25px;">
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="footer-seccion">
+                    <h3>Servicios</h3>
+                    <ul class="footer-links">
+                        <li class="footer-link"><a href="#">Transferencias RIA</a></li>
+                        <li class="footer-link"><a href="#">Recargas BOSS Revolution</a></li>
+                        <li class="footer-link"><a href="#">Lotería de Florida</a></li>
+                        <li class="footer-link"><a href="#">Pagos con EBT</a></li>
+                    </ul>
                 </div>
             </div>
         </div>
@@ -1619,9 +1824,74 @@
         // SISTEMA DE HISTORIAL DE NAVEGACIÓN
         let historialNavegacion = [];
         let posicionesScroll = {};
-
-        // VARIABLES GLOBALES PARA CONTROL DE SCROLL Y PÁGINA ACTIVA
         let currentPage = 'inicio';
+        let mobileDropdownAbierto = null;
+
+        // DETECCIÓN DE MÓVIL
+        function esMovil() {
+            return window.innerWidth <= 768;
+        }
+
+        // INICIALIZACIÓN DE ELEMENTOS MÓVIL
+        function inicializarElementosMovil() {
+            if (esMovil()) {
+                // Mostrar menú móvil y ocultar menú desktop
+                document.querySelector('.mobile-menu').style.display = 'block';
+                document.querySelector('.menu-navegacion').style.display = 'none';
+                
+                // Ajustar posición del botón atrás
+                document.querySelectorAll('.btn-atras').forEach(btn => {
+                    btn.style.top = '110px';
+                });
+            } else {
+                // Mostrar menú desktop y ocultar menú móvil
+                document.querySelector('.mobile-menu').style.display = 'none';
+                document.querySelector('.menu-navegacion').style.display = 'block';
+                
+                // Restaurar posición del botón atrás
+                document.querySelectorAll('.btn-atras').forEach(btn => {
+                    btn.style.top = '150px';
+                });
+                
+                // Cerrar cualquier dropdown móvil abierto
+                cerrarMobileDropdowns();
+            }
+        }
+
+        // TOGGLE DROPDOWNS MÓVIL
+        function toggleMobileDropdown(tipo) {
+            const dropdown = document.getElementById(`dropdown-${tipo}`);
+            
+            if (mobileDropdownAbierto === tipo) {
+                // Cerrar dropdown actual
+                dropdown.classList.remove('abierto');
+                mobileDropdownAbierto = null;
+            } else {
+                // Cerrar dropdown anterior si hay uno abierto
+                if (mobileDropdownAbierto) {
+                    document.getElementById(`dropdown-${mobileDropdownAbierto}`).classList.remove('abierto');
+                }
+                
+                // Abrir nuevo dropdown
+                dropdown.classList.add('abierto');
+                mobileDropdownAbierto = tipo;
+            }
+        }
+
+        // CERRAR DROPDOWNS MÓVIL
+        function cerrarMobileDropdowns() {
+            document.querySelectorAll('.mobile-dropdown').forEach(dropdown => {
+                dropdown.classList.remove('abierto');
+            });
+            mobileDropdownAbierto = null;
+        }
+
+        // IR AL INICIO (logo click)
+        function irAlInicio() {
+            historialNavegacion = []; // Limpiar historial
+            mostrarPagina('inicio');
+            cerrarMobileDropdowns();
+        }
 
         // CONFIGURACIÓN COMPLETA DE CATEGORÍAS
         const categorias = {
@@ -1681,17 +1951,17 @@
         const sobreTiendas = {
             'sobre-tienda1': {
                 titulo: 'Familia Market - Miami Gardens',
-                imagenes: ['sobre-tienda1-portada-1', 'sobre-tienda1-portada-2', 'sobre-tienda1-portada-3'],
+                imagenes: ['sobre-tienda1-portada-1', 'sobre-tienda1-portada-2'],
                 descripcion: 'Nuestra tienda en Miami Gardens es mucho más que un establecimiento comercial: es el corazón de la comunidad. Con años de experiencia sirviendo a las familias del área, nos hemos convertido en el lugar de confianza donde encuentras desde los productos básicos hasta servicios internacionales que conectan a tu familia con el mundo. Nuestro equipo bilingüe está siempre listo para ayudarte con una sonrisa y el conocimiento que necesitas.'
             },
             'sobre-tienda2': {
                 titulo: 'Familia Market - Allapattah',
-                imagenes: ['sobre-tienda2-portada-1', 'sobre-tienda2-portada-2', 'sobre-tienda2-portada-3'],
+                imagenes: ['sobre-tienda2-portada-1', 'sobre-tienda2-portada-2'],
                 descripcion: 'Ubicada en el vibrante corazón de Allapattah, nuestra tienda se especializa en ofrecer una amplia variedad de productos y servicios para toda la familia. Pero eso no es todo: también ofrecemos todos los servicios internacionales que necesitas para mantenerte conectado con tus seres queridos. Ven y descubre por qué somos la opción preferida de los que buscan calidad y servicio excepcional.'
             },
             'sobre-tienda3': {
                 titulo: 'Familia Market - South Miami Heights',
-                imagenes: ['sobre-tienda3-portada-1', 'sobre-tienda3-portada-2', 'sobre-tienda3-portada-3'],
+                imagenes: ['sobre-tienda3-portada-1', 'sobre-tienda3-portada-2'],
                 descripcion: 'En South Miami Heights, nuestra tienda se destaca por su amplio estacionamiento, fácil acceso y la mejor selección de productos de higiene personal y cuidado del hogar. Somos el destino ideal para las familias que valoran la comodidad, la variedad y ese trato personalizado que nos caracteriza. Con años de experiencia sirviendo a la comunidad, sabemos exactamente lo que tu familia necesita y nos enorgullece ofrecértelo.'
             }
         };
@@ -1898,13 +2168,15 @@
         }
 
         function actualizarMenuActivo(paginaId) {
-            document.querySelectorAll('.menu-link').forEach(link => {
-                link.classList.remove('activo');
-            });
-            
-            const menuItem = document.querySelector(`.menu-link[onclick="mostrarPagina('${paginaId}')"]`);
-            if (menuItem) {
-                menuItem.classList.add('activo');
+            if (!esMovil()) {
+                document.querySelectorAll('.menu-link').forEach(link => {
+                    link.classList.remove('activo');
+                });
+                
+                const menuItem = document.querySelector(`.menu-link[onclick="mostrarPagina('${paginaId}')"]`);
+                if (menuItem) {
+                    menuItem.classList.add('activo');
+                }
             }
         }
 
@@ -1925,6 +2197,9 @@
             
             document.getElementById('categorias-container').innerHTML = '';
             document.getElementById('sobre-tienda-container').innerHTML = '';
+            
+            // Cerrar dropdowns móviles al cambiar de página
+            cerrarMobileDropdowns();
             
             document.getElementById(paginaId).classList.add('activa');
             actualizarMenuActivo(paginaId);
@@ -2015,13 +2290,12 @@
                         <div class="slider-portada" id="slider-${tiendaId}">
                             <div class="slider-track">
                                 <div class="slide activo">
-                                    <img src="images/sobre-tienda/${tienda.imagenes[0]}.webp" alt="${tienda.titulo}" class="slide-img">
+                                    <img src="images/sobre-tienda/${tienda.imagenes[0]}.webp" alt="${tienda.titulo}" class="slide-img img-pc">
+                                    <img src="images/portada/Portadas para movil/${tiendaId}-1.webp" alt="${tienda.titulo}" class="slide-img img-movil">
                                 </div>
                                 <div class="slide">
-                                    <img src="images/sobre-tienda/${tienda.imagenes[1]}.webp" alt="${tienda.titulo}" class="slide-img">
-                                </div>
-                                <div class="slide">
-                                    <img src="images/sobre-tienda/${tienda.imagenes[2]}.webp" alt="${tienda.titulo}" class="slide-img">
+                                    <img src="images/sobre-tienda/${tienda.imagenes[1]}.webp" alt="${tienda.titulo}" class="slide-img img-pc">
+                                    <img src="images/portada/Portadas para movil/${tiendaId}-2.webp" alt="${tienda.titulo}" class="slide-img img-movil">
                                 </div>
                             </div>
                             <div class="slider-controls">
@@ -2071,6 +2345,7 @@
 
         // INICIALIZACIÓN AL CARGAR LA PÁGINA
         document.addEventListener('DOMContentLoaded', function() {
+            inicializarElementosMovil();
             inicializarSlidersEnPagina('inicio');
             actualizarMenuActivo('inicio');
             
@@ -2080,6 +2355,18 @@
                     inicializarMapa();
                 }, 500);
             }
+            
+            // Event listener para redimensionamiento
+            window.addEventListener('resize', inicializarElementosMovil);
+            
+            // Cerrar dropdowns al hacer click fuera
+            document.addEventListener('click', function(event) {
+                if (esMovil() && mobileDropdownAbierto && 
+                    !event.target.closest('.mobile-menu-container') &&
+                    !event.target.closest('.mobile-dropdown')) {
+                    cerrarMobileDropdowns();
+                }
+            });
             
             // Efectos hover mejorados
             const cards = document.querySelectorAll('.beneficio, .tarjeta-tienda, .boton-circular');
