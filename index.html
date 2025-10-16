@@ -965,7 +965,7 @@
         }
 
         /* ================================================ */
-        /* ESTILOS ESPECÍFICOS PARA MÓVIL */
+        /* ESTILOS ESPECÍFICOS PARA MÓVIL - CORREGIDOS */
         /* ================================================ */
 
         /* HEADER MÓVIL COMPACTO */
@@ -991,47 +991,71 @@
             }
         }
 
-        /* MENÚ ROJO MÓVIL COMPACTO */
+        /* MENÚ ROJO MÓVIL COMPACTO - CORREGIDO */
         @media (max-width: 768px) {
             .menu-navegacion {
-                padding: 0 !important;
-                top: 60px !important;
-                height: 50px !important;
-                min-height: 50px !important;
-            }
-
-            .menu-lista {
-                display: flex !important;
-                justify-content: space-around !important;
-                align-items: center !important;
-                height: 100% !important;
-                padding: 0 10px !important;
-            }
-
-            .menu-item {
-                flex: 1 !important;
-                text-align: center !important;
-                height: 100% !important;
-            }
-
-            .menu-link {
-                padding: 12px 8px !important;
-                font-size: 0.8rem !important;
-                height: 100% !important;
-                display: flex !important;
-                align-items: center !important;
-                justify-content: center !important;
-                white-space: nowrap !important;
-                min-width: 0 !important;
-            }
-
-            .menu-link::after {
                 display: none !important;
             }
 
-            /* OCULTAR DROPDOWN ORIGINAL EN MÓVIL */
-            .dropdown {
-                display: none !important;
+            .mobile-menu {
+                display: block !important;
+                background: linear-gradient(135deg, var(--color-rojo), var(--color-hover));
+                position: sticky;
+                top: 60px;
+                z-index: 999;
+                box-shadow: var(--sombra);
+                height: 50px;
+            }
+
+            .mobile-menu-container {
+                display: flex;
+                justify-content: space-around;
+                align-items: center;
+                height: 100%;
+                padding: 0 10px;
+            }
+
+            .mobile-menu-item {
+                color: var(--color-blanco);
+                padding: 12px 15px;
+                font-weight: 500;
+                font-size: 0.85rem;
+                cursor: pointer;
+                transition: var(--transicion);
+                white-space: nowrap;
+                position: relative;
+                text-align: center;
+                flex: 1;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                height: 100%;
+            }
+
+            /* MARCADOR ACTIVO IDÉNTICO A PC */
+            .mobile-menu-item.activo {
+                font-weight: 600;
+                background: rgba(255,255,255,0.1);
+            }
+
+            .mobile-menu-item::after {
+                content: '';
+                position: absolute;
+                bottom: 0;
+                left: 50%;
+                width: 0;
+                height: 3px;
+                background: var(--color-amarillo);
+                transition: var(--transicion);
+                transform: translateX(-50%);
+            }
+
+            .mobile-menu-item.activo::after {
+                width: 80%;
+            }
+
+            .mobile-menu-item:hover::after {
+                width: 60%;
             }
 
             /* MENÚS DESPLEGABLES MÓVIL */
@@ -1079,7 +1103,7 @@
             }
         }
 
-        /* PORTADAS MÓVIL */
+        /* PORTADAS MÓVIL OPTIMIZADAS */
         @media (max-width: 768px) {
             .img-pc {
                 display: none !important;
@@ -1096,38 +1120,42 @@
             #sobre-tienda-container .slider-portada {
                 height: 50vh !important;
             }
+
+            /* OPTIMIZACIÓN DE PORTADAS MÓVIL */
+            .slide-img.img-movil {
+                object-fit: contain !important;
+                background: var(--color-gris-claro);
+            }
         }
 
-        /* BANNER LOGOS MÓVIL */
+        /* BANNER LOGOS MÓVIL - CORREGIDO (2x2) */
         @media (max-width: 768px) {
             .logos-principales {
-                padding: 30px 5% !important;
+                padding: 25px 5% !important;
                 height: auto !important;
-                min-height: 80px !important;
+                min-height: 120px !important;
             }
 
             .logos-grid {
-                gap: 20px !important;
-                overflow-x: auto !important;
-                padding: 10px 0 !important;
-                justify-content: flex-start !important;
-                scroll-snap-type: x mandatory !important;
-                -webkit-overflow-scrolling: touch !important;
+                display: grid !important;
+                grid-template-columns: 1fr 1fr !important;
+                gap: 15px !important;
+                justify-items: center !important;
+                max-width: 300px !important;
+                margin: 0 auto !important;
             }
 
             .logo-item {
-                min-width: 100px !important;
-                scroll-snap-align: start !important;
-                flex-shrink: 0 !important;
-                padding: 5px !important;
+                min-width: auto !important;
+                padding: 8px !important;
             }
 
             .logo-grande {
-                height: 35px !important;
+                height: 40px !important;
             }
 
             .logo-item p {
-                font-size: 0.65rem !important;
+                font-size: 0.7rem !important;
                 margin-top: 5px !important;
             }
         }
@@ -1145,6 +1173,29 @@
                 min-width: auto !important;
                 width: 100% !important;
                 scroll-snap-align: none !important;
+            }
+        }
+
+        /* BOTONES CIRCULARES MÓVIL - MÁS GRANDES */
+        @media (max-width: 768px) {
+            .contenedor-circulos {
+                grid-template-columns: repeat(2, 1fr) !important;
+                gap: 20px !important;
+            }
+
+            .boton-circular {
+                width: 140px !important;
+                height: 140px !important;
+            }
+
+            .texto-circulo {
+                font-size: 1rem !important;
+                font-weight: 600;
+            }
+
+            /* REORGANIZACIÓN GRID MÓVIL */
+            .item-circulo:nth-child(-n+10) {
+                grid-column: auto !important;
             }
         }
 
@@ -1193,28 +1244,6 @@
                 grid-column: 1 / -1 !important;
                 text-align: center !important;
                 margin-bottom: 20px !important;
-            }
-        }
-
-        /* BOTONES CIRCULARES MÓVIL */
-        @media (max-width: 768px) {
-            .contenedor-circulos {
-                grid-template-columns: repeat(3, 1fr) !important;
-                gap: 15px !important;
-            }
-
-            .boton-circular {
-                width: 100px !important;
-                height: 100px !important;
-            }
-
-            .texto-circulo {
-                font-size: 0.75rem !important;
-            }
-
-            /* REORGANIZACIÓN GRID MÓVIL */
-            .item-circulo:nth-child(-n+10) {
-                grid-column: auto !important;
             }
         }
 
@@ -1325,20 +1354,6 @@
                 height: 60px;
             }
             
-            .contenedor-circulos {
-                grid-template-columns: repeat(2, 1fr);
-                gap: 12px;
-            }
-            
-            .boton-circular {
-                width: 110px;
-                height: 110px;
-            }
-            
-            .texto-circulo {
-                font-size: 0.7rem;
-            }
-            
             .titulo-principal {
                 font-size: 1.8rem;
             }
@@ -1362,7 +1377,7 @@
         <button class="btn-idioma">Cambiar a Español</button>
     </header>
 
-    <!-- MENÚ DE NAVEGACIÓN CON MARCADOR ACTIVO -->
+    <!-- MENÚ DE NAVEGACIÓN CON MARCADOR ACTIVO (PC) -->
     <nav class="menu-navegacion">
         <ul class="menu-lista">
             <li class="menu-item">
@@ -1821,9 +1836,8 @@
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 
     <script>
-        // SISTEMA DE HISTORIAL DE NAVEGACIÓN
+        // SISTEMA DE HISTORIAL DE NAVEGACIÓN MEJORADO
         let historialNavegacion = [];
-        let posicionesScroll = {};
         let currentPage = 'inicio';
         let mobileDropdownAbierto = null;
 
@@ -1843,6 +1857,9 @@
                 document.querySelectorAll('.btn-atras').forEach(btn => {
                     btn.style.top = '110px';
                 });
+
+                // Optimizar portadas para móvil
+                optimizarPortadasMovil();
             } else {
                 // Mostrar menú desktop y ocultar menú móvil
                 document.querySelector('.mobile-menu').style.display = 'none';
@@ -1858,6 +1875,17 @@
             }
         }
 
+        // OPTIMIZAR PORTADAS MÓVIL
+        function optimizarPortadasMovil() {
+            if (!esMovil()) return;
+            
+            const portadasMovil = document.querySelectorAll('.img-movil');
+            portadasMovil.forEach(img => {
+                img.style.objectFit = 'contain';
+                img.style.backgroundColor = '#f8f9fa';
+            });
+        }
+
         // TOGGLE DROPDOWNS MÓVIL
         function toggleMobileDropdown(tipo) {
             const dropdown = document.getElementById(`dropdown-${tipo}`);
@@ -1866,6 +1894,7 @@
                 // Cerrar dropdown actual
                 dropdown.classList.remove('abierto');
                 mobileDropdownAbierto = null;
+                actualizarMenuActivoMovil(null);
             } else {
                 // Cerrar dropdown anterior si hay uno abierto
                 if (mobileDropdownAbierto) {
@@ -1875,6 +1904,21 @@
                 // Abrir nuevo dropdown
                 dropdown.classList.add('abierto');
                 mobileDropdownAbierto = tipo;
+                actualizarMenuActivoMovil(tipo);
+            }
+        }
+
+        // ACTUALIZAR MENÚ ACTIVO MÓVIL
+        function actualizarMenuActivoMovil(tipo) {
+            document.querySelectorAll('.mobile-menu-item').forEach(item => {
+                item.classList.remove('activo');
+            });
+            
+            if (tipo) {
+                const menuItem = document.querySelector(`.mobile-menu-item[onclick="toggleMobileDropdown('${tipo}')"]`);
+                if (menuItem) {
+                    menuItem.classList.add('activo');
+                }
             }
         }
 
@@ -1884,13 +1928,35 @@
                 dropdown.classList.remove('abierto');
             });
             mobileDropdownAbierto = null;
+            actualizarMenuActivoMovil(null);
         }
 
-        // IR AL INICIO (logo click)
+        // IR AL INICIO (logo click) - CORREGIDO
         function irAlInicio() {
-            historialNavegacion = []; // Limpiar historial
-            mostrarPagina('inicio');
+            // Limpiar historial y siempre ir al inicio
+            historialNavegacion = [];
+            currentPage = 'inicio';
+            
+            document.querySelectorAll('.pagina').forEach(pagina => {
+                pagina.classList.remove('activa');
+            });
+            
+            document.getElementById('categorias-container').innerHTML = '';
+            document.getElementById('sobre-tienda-container').innerHTML = '';
+            
+            // Cerrar dropdowns móviles
             cerrarMobileDropdowns();
+            
+            document.getElementById('inicio').classList.add('activa');
+            actualizarMenuActivo('inicio');
+            
+            // Scroll al top siempre
+            window.scrollTo(0, 0);
+            
+            // Reiniciar sliders
+            setTimeout(() => {
+                inicializarSlidersEnPagina('inicio');
+            }, 100);
         }
 
         // CONFIGURACIÓN COMPLETA DE CATEGORÍAS
@@ -2158,15 +2224,6 @@
         }
 
         // FUNCIONES PRINCIPALES MEJORADAS CON HISTORIAL
-        function guardarPosicionScroll() {
-            posicionesScroll[currentPage] = window.pageYOffset || document.documentElement.scrollTop;
-        }
-
-        function restaurarPosicionScroll(paginaId) {
-            const posicion = posicionesScroll[paginaId] || 0;
-            window.scrollTo(0, posicion);
-        }
-
         function actualizarMenuActivo(paginaId) {
             if (!esMovil()) {
                 document.querySelectorAll('.menu-link').forEach(link => {
@@ -2177,14 +2234,14 @@
                 if (menuItem) {
                     menuItem.classList.add('activo');
                 }
+            } else {
+                // Para móvil, actualizar menú móvil
+                actualizarMenuActivoMovil(null);
             }
         }
 
         function mostrarPagina(paginaId) {
-            // Guardar posición actual antes de cambiar
-            guardarPosicionScroll();
-            
-            // Agregar al historial (excepto si es la misma página)
+            // No agregar al historial si es la misma página
             if (paginaId !== currentPage) {
                 historialNavegacion.push(currentPage);
             }
@@ -2206,7 +2263,9 @@
             
             setTimeout(() => {
                 inicializarSlidersEnPagina(paginaId);
-                restaurarPosicionScroll(paginaId);
+                
+                // Scroll al top al cambiar de página
+                window.scrollTo(0, 0);
                 
                 // Inicializar mapa cuando se muestra la página de tiendas
                 if (paginaId === 'mis-tiendas') {
@@ -2220,15 +2279,39 @@
         function volverAtras() {
             if (historialNavegacion.length > 0) {
                 const paginaAnterior = historialNavegacion.pop();
-                mostrarPagina(paginaAnterior);
+                currentPage = paginaAnterior;
+                
+                document.querySelectorAll('.pagina').forEach(pagina => {
+                    pagina.classList.remove('activa');
+                });
+                
+                document.getElementById('categorias-container').innerHTML = '';
+                document.getElementById('sobre-tienda-container').innerHTML = '';
+                
+                // Cerrar dropdowns móviles
+                cerrarMobileDropdowns();
+                
+                if (document.getElementById(paginaAnterior)) {
+                    document.getElementById(paginaAnterior).classList.add('activa');
+                } else {
+                    // Si la página anterior no existe, ir al inicio
+                    document.getElementById('inicio').classList.add('activa');
+                    currentPage = 'inicio';
+                }
+                
+                actualizarMenuActivo(currentPage);
+                
+                setTimeout(() => {
+                    inicializarSlidersEnPagina(currentPage);
+                    window.scrollTo(0, 0);
+                }, 100);
             } else {
                 // Si no hay historial, ir al inicio
-                mostrarPagina('inicio');
+                irAlInicio();
             }
         }
 
         function mostrarCategoria(categoriaId) {
-            guardarPosicionScroll();
             historialNavegacion.push(currentPage);
             
             const categoria = categorias[categoriaId];
@@ -2275,7 +2358,6 @@
         }
 
         function mostrarSobreTienda(tiendaId) {
-            guardarPosicionScroll();
             historialNavegacion.push(currentPage);
             
             const tienda = sobreTiendas[tiendaId];
