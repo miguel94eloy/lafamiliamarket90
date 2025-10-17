@@ -2,6 +2,7 @@
 
 // SISTEMA DE HISTORIAL DE NAVEGACIÓN MEJORADO
 let historialNavegacion = [];
+let mapaInicializado = false;
 let currentPage = 'inicio';
 let mobileDropdownAbierto = null;
 let animacionBotonesInterval;
@@ -213,10 +214,33 @@ function irAlInicio() {
     }, 100);
 }
 
-// INICIALIZACIÓN DEL MAPA OPENSTREETMAP
+// ✅ FUNCIÓN MEJORADA PARA INICIALIZAR EL MAPA
 function inicializarMapa() {
+    // Si el mapa ya fue inicializado, no hacer nada
+    if (mapaInicializado) {
+        console.log('Mapa ya inicializado, saltando...');
+        return;
+    }
+
     const mapaContainer = document.getElementById('mapa-tiendas');
-    if (!mapaContainer) return;
+
+    if (!mapaContainer) {
+        console.log('Contenedor del mapa no encontrado');
+        return;
+    }
+
+    // ✅ LIMPIAR COMPLETAMENTE EL CONTENEDOR
+    mapaContainer.innerHTML = '';
+    
+    // ✅ FORZAR VISIBILIDAD Y TAMAÑO
+    mapaContainer.style.display = 'block';
+    mapaContainer.style.visibility = 'visible';
+    mapaContainer.style.height = '500px';
+    mapaContainer.style.width = '100%';
+    mapaContainer.style.position = 'relative';
+    mapaContainer.style.overflow = 'hidden';
+    mapaContainer.style.borderRadius = '20px';
+    mapaContainer.style.backgroundColor = '#f8f9fa';
 
     const tiendas = [
         {
@@ -227,67 +251,164 @@ function inicializarMapa() {
             enlace: 'https://maps.app.goo.gl/fS89V83GGuPCXW3H6?g_st=awb'
         },
         {
-            nombre: 'Familia Market - Allapattah',
-            lat: 25.814667,
-            lng: -80.240201,
-            direccion: '2412 NW 27th Ave, Miami, FL 33142',
-            enlace: 'https://www.google.com/maps?q=25.814667,-80.240201'
+            nombre: 'Familia Market - Allapattah', 
+            lat: 25.815396,
+            lng: -80.223562,
+            direccion: '1445 NW 36th St, Miami, FL 33142',
+            enlace: 'https://maps.app.goo.gl/1kRzVvQqJhxYyZ9w8?g_st=awb'
         },
         {
             nombre: 'Familia Market - South Miami Heights',
-            lat: 25.587899,
-            lng: -80.374533,
-            direccion: '11545 SW 186th St, Miami, FL 33157',
-            enlace: 'https://www.google.com/maps?q=25.587899,-80.374533'
+            lat: 25.752396, 
+            lng: -80.316862,
+            direccion: '11745 SW 112th St, Miami, FL 33186',
+            enlace: 'https://maps.app.goo.gl/9z7VvRrTqPxYwL4z9?g_st=awb'
         }
     ];
 
     try {
-        const mapa = L.map('mapa-tiendas').setView([25.7617, -80.1918], 10);
-        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-            attribution: '© OpenStreetMap contributors',
-            maxZoom: 18,
-        }).addTo(mapa);
+        // ✅ DELAY MÁS LARGO PARA GARANTIZAR RENDERIZADO
+        setTimeout(() => {
+            // ✅ VERIFICAR DIMENSIONES
+            if (mapaContainer.offsetHeight === 0 || mapaContainer.offsetWidth === 0) {
+                console.warn('Contenedor sin dimensiones válidas, forzando...');
+                mapaContainer.style.height = '500px';
+                mapaContainer.style.width = '100%';
+                
+                // Forzar reflow
+                void mapaContainer.offsetHeight;
+            }
 
-        const iconoGoogleRojo = L.divIcon({
-            html: `<div style="background-color: #ea4335; width: 20px; height: 20px; border-radius: 50% 50% 50% 0; transform: rotate(-45deg); border: 2px solid white; box-shadow: 0 2px 10px rgba(0,0,0,0.3); position: relative; cursor: pointer;"><div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%) rotate(45deg); width: 6px; height: 6px; background: white; border-radius: 50%;"></div></div>`,
-            className: 'icono-google-maps',
-            iconSize: [20, 20],
-            iconAnchor: [10, 20]
-        });
+            // ✅ INICIALIZAR MAPA CON CONFIGURACIÓN ROBUSTA
+            const mapa = L.map('mapa-tiendas', {
+                center: [25.7617, -80.1918],
+                zoom: 10,
+                zoomControl: true,
+                scrollWheelZoom: true,
+                dragging: true,
+                tap: true,
+                fadeAnimation: false,
+                markerZoomAnimation: false,
+                preferCanvas: true // Mejor rendimiento
+            });
 
-        tiendas.forEach((tienda) => {
-            const marcador = L.marker([tienda.lat, tienda.lng], { 
-                icon: iconoGoogleRojo 
+            // ✅ CAPA DE TILES CON MÚLTIPLES FALLBACKS
+            const osmLayer = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                attribution: '© OpenStreetMap contributors',
+                maxZoom: 19,
+                errorTileUrl: 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjU2IiBoZWlnaHQ9IjI1NiIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjZjhjY2NjIi8+PHRleHQgeD0iNTAlIiB5PSI1MCUiIGZvbnQtc2l6ZT0iMTQiIGZpbGw9IiM2NjYiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGR5PSIuM2VtIj5NYXAgbm90IGF2YWlsYWJsZTwvdGV4dD48L3N2Zz4=',
+                crossOrigin: true
             }).addTo(mapa);
 
-            marcador.bindPopup(`
-                <div style="padding: 15px; min-width: 250px; font-family: 'Inter', sans-serif;">
-                    <h3 style="margin: 0 0 10px 0; color: #ed1c24; font-size: 16px; font-weight: 700;">${tienda.nombre}</h3>
-                    <p style="margin: 0 0 8px 0; font-size: 14px; color: #666; line-height: 1.4;">${tienda.direccion}</p>
-                    <a href="${tienda.enlace}" target="_blank" rel="noopener noreferrer" style="display: inline-block; background: #ed1c24; color: white; padding: 10px 20px; text-decoration: none; border-radius: 8px; font-size: 14px; font-weight: 600; margin-top: 8px; transition: all 0.3s;">
-                        🗺️ Get Directions on Google Maps
-                    </a>
-                </div>
-            `);
-
-            marcador.on('click', function() {
-                window.open(tienda.enlace, '_blank');
+            // ✅ ICONO PERSONALIZADO MEJORADO
+            const iconoGoogleRojo = L.divIcon({
+                html: `<div style="background-color: #ea4335; width: 24px; height: 24px; border-radius: 50% 50% 50% 0; transform: rotate(-45deg); border: 3px solid white; box-shadow: 0 2px 10px rgba(0,0,0,0.3); position: relative; cursor: pointer;">
+                         <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%) rotate(45deg); width: 8px; height: 8px; background: white; border-radius: 50%;"></div>
+                       </div>`,
+                className: 'icono-google-maps',
+                iconSize: [24, 24],
+                iconAnchor: [12, 24],
+                popupAnchor: [0, -24]
             });
-        });
+
+            // ✅ AGREGAR MARCADORES
+            tiendas.forEach((tienda) => {
+                const marcador = L.marker([tienda.lat, tienda.lng], { 
+                    icon: iconoGoogleRojo 
+                }).addTo(mapa);
+
+                marcador.bindPopup(`
+                    <div style="padding: 15px; min-width: 250px; font-family: 'Inter', sans-serif;">
+                        <h3 style="margin: 0 0 10px 0; color: #ed1c24; font-size: 16px; font-weight: 700;">${tienda.nombre}</h3>
+                        <p style="margin: 0 0 8px 0; font-size: 14px; color: #666; line-height: 1.4;">${tienda.direccion}</p>
+                        <a href="${tienda.enlace}" target="_blank" rel="noopener noreferrer" style="display: inline-block; background: #ed1c24; color: white; padding: 10px 20px; text-decoration: none; border-radius: 8px; font-size: 14px; font-weight: 600; margin-top: 8px; transition: all 0.3s;">
+                            🗺️ Get Directions on Google Maps
+                        </a>
+                    </div>
+                `);
+
+                // Abrir enlace al hacer clic
+                marcador.on('click', function() {
+                    window.open(tienda.enlace, '_blank');
+                });
+            });
+
+            // ✅ FUNCIÓN MEJORADA DE REDIMENSIONADO
+            const forceResizeMap = () => {
+                setTimeout(() => {
+                    try {
+                        if (mapa && typeof mapa.invalidateSize === 'function') {
+                            mapa.invalidateSize(true);
+                            console.log('✅ Mapa redimensionado correctamente');
+                        }
+                    } catch (error) {
+                        console.warn('⚠️ Error al redimensionar mapa:', error);
+                    }
+                }, 150);
+            };
+
+            // ✅ EJECUTAR MÚLTIPLES REDIMENSIONADOS ESTRATÉGICOS
+            const resizeDelays = [100, 300, 500, 800, 1200, 2000];
+            resizeDelays.forEach(delay => {
+                setTimeout(forceResizeMap, delay);
+            });
+
+            // ✅ EVENTO DE REDIMENSIONADO DE VENTANA
+            let resizeTimeout;
+            window.addEventListener('resize', function() {
+                clearTimeout(resizeTimeout);
+                resizeTimeout = setTimeout(forceResizeMap, 300);
+            });
+
+            // ✅ VERIFICAR CARGA COMPLETA
+            mapa.whenReady(function() {
+                console.log('✅ Mapa completamente cargado y listo');
+                mapaInicializado = true;
+                console.log('✅ Mapa marcado como inicializado');
+                // Redimensionado final de seguridad
+                setTimeout(forceResizeMap, 2500);
+            });
+
+            // ✅ MANEJAR ERRORES DE CARGA DE TILES
+            mapa.on('tileerror', function(error) {
+                console.warn('Error loading tile:', error);
+            });
+
+        }, 400); // Delay inicial aumentado
 
     } catch (error) {
-        console.error('Error loading map:', error);
-        mapaContainer.innerHTML = `
-            <div style="text-align: center; padding: 40px; color: #666;">
-                <h3>🗺️ Our Stores Map</h3>
-                <p>Store locations are loaded correctly</p>
-                <p><small>Miami Gardens, Allapattah, South Miami Heights</small></p>
-            </div>
-        `;
+        console.error('❌ Error crítico cargando mapa:', error);
+        mostrarFallbackMapa(mapaContainer);
     }
 }
 
+// ✅ FUNCIÓN DE FALLBACK MEJORADA
+function mostrarFallbackMapa(container) {
+    container.innerHTML = `
+        <div style="text-align: center; padding: 40px; color: #666; background: #f8f9fa; border-radius: 20px; height: 100%; display: flex; flex-direction: column; justify-content: center; align-items: center;">
+            <div style="font-size: 3rem; margin-bottom: 15px;">🗺️</div>
+            <h3 style="margin-bottom: 15px; color: #ed1c24;">Map Loading Issue</h3>
+            <p>We're having trouble loading the interactive map.</p>
+            <p style="margin-top: 10px;"><small>Our locations in Miami Gardens, Allapattah, and South Miami Heights</small></p>
+            <button onclick="reiniciarMapaCompletamente()" style="margin-top: 20px; padding: 12px 24px; background: #ed1c24; color: white; border: none; border-radius: 8px; cursor: pointer; font-weight: 600; transition: all 0.3s;">
+                Reload Map
+            </button>
+        </div>
+    `;
+}
+
+// ✅ FUNCIÓN DE REINICIO COMPLETO
+function reiniciarMapaCompletamente() {
+    const mapaContainer = document.getElementById('mapa-tiendas');
+    if (mapaContainer) {
+        // Limpiar completamente
+        mapaContainer.innerHTML = '';
+        // Pequeño delay antes de reiniciar
+        setTimeout(() => {
+            inicializarMapa();
+        }, 500);
+    }
+}
 // SISTEMA MEJORADO DE SLIDERS
 class SliderManager {
     constructor(sliderContainer) {
@@ -466,13 +587,32 @@ function mostrarPagina(paginaId) {
     document.getElementById(paginaId).classList.add('activa');
     actualizarMenuActivo(paginaId);
     gestionarBotonesFlotantes();
+    
     setTimeout(() => {
         inicializarSlidersEnPagina(paginaId);
         window.scrollTo(0, 0);
+        
+        // ✅ INICIALIZAR MAPA CON ESTRATEGIA MEJORADA
         if (paginaId === 'mis-tiendas') {
+            // Limpiar contenedor primero
+            const mapaContainer = document.getElementById('mapa-tiendas');
+            if (mapaContainer) {
+                mapaContainer.innerHTML = '';
+            }
+            
+            // Delay más largo para asegurar que la página esté completamente renderizada
             setTimeout(() => {
                 inicializarMapa();
-            }, 300);
+            }, 500);
+            
+            // Backup adicional
+            setTimeout(() => {
+                if (!document.querySelector('#mapa-tiendas .leaflet-container') || 
+                    document.querySelector('#mapa-tiendas .leaflet-container').offsetHeight === 0) {
+                    console.log('Backup map initialization triggered');
+                    inicializarMapa();
+                }
+            }, 1500);
         }
     }, 100);
 }
