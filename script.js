@@ -252,18 +252,19 @@ function inicializarMapa() {
         },
         {
             nombre: 'Familia Market - Allapattah', 
-            lat: 25.815396,
-            lng: -80.223562,
-            direccion: '1445 NW 36th St, Miami, FL 33142',
-            enlace: 'https://maps.app.goo.gl/1kRzVvQqJhxYyZ9w8?g_st=awb'
+    lat: 25.815396,
+    lng: -80.223562,
+    direccion: '2412 NW 27th Ave, Miami, FL 33142',  // ✅ CORRECTA
+    enlace: 'https://maps.app.goo.gl/1kRzVvQqJhxYyZ9w8?g_st=awb'
         },
         {
-            nombre: 'Familia Market - South Miami Heights',
-            lat: 25.752396, 
-            lng: -80.316862,
-            direccion: '11745 SW 112th St, Miami, FL 33186',
-            enlace: 'https://maps.app.goo.gl/9z7VvRrTqPxYwL4z9?g_st=awb'
-        }
+    nombre: 'Familia Market - Opa-Locka',
+    lat: 25.8670278,   // CORREGIDO: 25°52'01.3"N
+    lng: -80.2421667,  // CORREGIDO: 80°14'31.8"W  
+    direccion: '10139 NW 27th Ave, North Miami, FL 33147',
+    enlace: 'https://www.google.com/maps?q=25.8670278,-80.2421667'
+}
+
     ];
 
     try {
@@ -389,7 +390,7 @@ function mostrarFallbackMapa(container) {
             <div style="font-size: 3rem; margin-bottom: 15px;">🗺️</div>
             <h3 style="margin-bottom: 15px; color: #ed1c24;">Map Loading Issue</h3>
             <p>We're having trouble loading the interactive map.</p>
-            <p style="margin-top: 10px;"><small>Our locations in Miami Gardens, Allapattah, and South Miami Heights</small></p>
+            <p style="margin-top: 10px;"><small>Our locations in Miami Gardens, Allapattah, and Opa-Locka</small></p>
             <button onclick="reiniciarMapaCompletamente()" style="margin-top: 20px; padding: 12px 24px; background: #ed1c24; color: white; border: none; border-radius: 8px; cursor: pointer; font-weight: 600; transition: all 0.3s;">
                 Reload Map
             </button>
