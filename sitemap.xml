@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  
+  <!-- Página principal inglés -->
+  <url>
+    <loc>https://lafamiliamarket90.com/</loc>
+    <lastmod>2025-01-17</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+    <xhtml:link rel="alternate" hreflang="es" href="https://lafamiliamarket90.com/index-es.html" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://lafamiliamarket90.com/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://lafamiliamarket90.com/" />
+  </url>
+
+  <!-- Páginas internas inglés -->
+  <url>
+    <loc>https://lafamiliamarket90.com/#quienes-somos</loc>
+    <lastmod>2025-01-17</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://lafamiliamarket90.com/#mis-tiendas</loc>
+    <lastmod>2025-01-17</lastmod>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://lafamiliamarket90.com/#especiales</loc>
+    <lastmod>2025-01-17</lastmod>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://lafamiliamarket90.com/#opiniones</loc>
+    <lastmod>2025-01-17</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://lafamiliamarket90.com/#contacto</loc>
+    <lastmod>2025-01-17</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://lafamiliamarket90.com/#terminos</loc>
+    <lastmod>2025-01-17</lastmod>
+    <priority>0.5</priority>
+  </url>
+
+  <!-- Categorías inglés -->
+  <url>
+    <loc>https://lafamiliamarket90.com/#abarrotes</loc>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://lafamiliamarket90.com/#electronica</loc>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://lafamiliamarket90.com/#ferreteria</loc>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://lafamiliamarket90.com/#bebidas</loc>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://lafamiliamarket90.com/#comestibles</loc>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://lafamiliamarket90.com/#snacks</loc>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://lafamiliamarket90.com/#higiene</loc>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://lafamiliamarket90.com/#hogar</loc>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://lafamiliamarket90.com/#promociones</loc>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://lafamiliamarket90.com/#otros</loc>
+    <priority>0.6</priority>
+  </url>
+
+  <!-- Páginas de tiendas inglés -->
+  <url>
+    <loc>https://lafamiliamarket90.com/#sobre-tienda1</loc>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://lafamiliamarket90.com/#sobre-tienda2</loc>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://lafamiliamarket90.com/#sobre-tienda3</loc>
+    <priority>0.6</priority>
+  </url>
+
+  <!-- Página principal español -->
+  <url>
+    <loc>https://lafamiliamarket90.com/index-es.html</loc>
+    <lastmod>2025-01-17</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <xhtml:link rel="alternate" hreflang="es" href="https://lafamiliamarket90.com/index-es.html" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://lafamiliamarket90.com/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://lafamiliamarket90.com/" />
+  </url>
+
+  <!-- Páginas internas español -->
+  <url>
+    <loc>https://lafamiliamarket90.com/index-es.html#quienes-somos</loc>
+    <lastmod>2025-01-17</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://lafamiliamarket90.com/index-es.html#mis-tiendas</loc>
+    <lastmod>2025-01-17</lastmod>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://lafamiliamarket90.com/index-es.html#especiales</loc>
+    <lastmod>2025-01-17</lastmod>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://lafamiliamarket90.com/index-es.html#opiniones</loc>
+    <lastmod>2025-01-17</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://lafamiliamarket90.com/index-es.html#contacto</loc>
+    <lastmod>2025-01-17</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://lafamiliamarket90.com/index-es.html#terminos</loc>
+    <lastmod>2025-01-17</lastmod>
+    <priority>0.5</priority>
+  </url>
+
+</urlset>
