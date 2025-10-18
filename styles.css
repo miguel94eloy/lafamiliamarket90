@@ -627,23 +627,32 @@ body {
 /* ESTILOS PARA CATEGORÍAS */
 .grid-imagenes {
     display: grid;
-    gap: 25px;
+    gap: 10px;
     margin-bottom: 50px;
+    max-width: 1200px; /* AGREGAR para centrar */
+    margin-left: auto; /* AGREGAR para centrar */
+    margin-right: auto; /* AGREGAR para centrar */
 }
 
 .fila-completa {
     grid-column: 1 / -1;
+    width: 100%;
+    display: block !important;           /* AGREGAR */
+    min-width: 100% !important;          /* AGREGAR */
+    min-width: 100% !important;          /* AGREGAR */
+    
 }
 
 .fila-mitad {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 25px;
+    gap: 10px;
 }
 
 .imagen-grande {
     width: 100%;
-    height: 450px;
+    height: auto;               /* CAMBIAR: de 450px a auto */
+    aspect-ratio: 4/3;          /* AGREGAR esta línea */
     object-fit: cover;
     border-radius: 20px;
     transition: var(--transicion);
@@ -652,7 +661,8 @@ body {
 
 .imagen-pequena {
     width: 100%;
-    height: 350px;
+    height: auto;               /* CAMBIAR: de 350px a auto */
+    aspect-ratio: 3/2;          /* AGREGAR esta línea */
     object-fit: cover;
     border-radius: 20px;
     transition: var(--transicion);

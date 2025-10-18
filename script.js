@@ -8,57 +8,122 @@ let mobileDropdownAbierto = null;
 let animacionBotonesInterval;
 let dropdownAbierto = null;
 
-// CONFIGURACIÓN COMPLETA DE CATEGORÍAS
+// AGREGAR ESTA FUNCIÓN AL INICIO DEL ARCHIVO (después de las variables globales)
+function obtenerIdiomaActual() {
+    return window.location.href.includes('index-es.html') ? 'es' : 'en';
+}
+
+// CONFIGURACIÓN BILINGÜE DE CATEGORÍAS
 const categorias = {
     'abarrotes': {
-        titulo: 'Groceries',
-        imagenes: ['abarrotes-1', 'abarrotes-2', 'abarrotes-3', 'abarrotes-4'],
-        descripcion: 'At Familia Market we understand that quality begins with ingredients. That\'s why we carefully select each grocery product to guarantee freshness and flavor on your table. From basic grains to the spices that bring your family recipes to life.'
+        titulo: {
+            en: 'Groceries',
+            es: 'Abarrotes'
+        },
+        descripcion: {
+            en: 'At Familia Market we understand that quality begins with ingredients. That\'s why we carefully select each grocery product to guarantee freshness and flavor on your table. From basic grains to the spices that bring your family recipes to life.',
+            es: 'En Familia Market entendemos que la calidad comienza con los ingredientes. Por eso seleccionamos cuidadosamente cada producto de abarrotes para garantizar frescura y sabor en tu mesa. Desde granos básicos hasta las especias que dan vida a tus recetas familiares.'
+        },
+        imagenes: ['abarrotes/abarrotes-1', 'abarrotes/abarrotes-2', 'abarrotes/abarrotes-3', 'abarrotes/abarrotes-4']
     },
     'electronica': {
-        titulo: 'Electronics', 
-        imagenes: ['electronica-1', 'electronica-2', 'electronica-3', 'electronica-4'],
-        descripcion: 'Stay connected with the best technology. At Familia Market you find from cables and accessories to essential devices that simplify your daily life. Guaranteed quality and prices that respect your budget.'
+        titulo: {
+            en: 'Electronics',
+            es: 'Electrónica'
+        },
+        descripcion: {
+            en: 'Stay connected with the best technology. At Familia Market you find from cables and accessories to essential devices that simplify your daily life. Guaranteed quality and prices that respect your budget.',
+            es: 'Mantente conectado con la mejor tecnología. En Familia Market encuentras desde cables y accesorios hasta dispositivos esenciales que simplifican tu vida diaria. Calidad garantizada y precios que respetan tu presupuesto.'
+        },
+        imagenes: ['electronica/electronica-1', 'electronica/electronica-2', 'electronica/electronica-3', 'electronica/electronica-4']
     },
     'ferreteria': {
-        titulo: 'Hardware',
-        imagenes: ['ferreteria-1', 'ferreteria-2', 'ferreteria-3', 'ferreteria-4'],
-        descripcion: 'Everything you need for your home projects and repairs. Reliable tools, durable materials and the advice you need to make your ideas a reality. At Familia Market, your project is our project.'
+        titulo: {
+            en: 'Hardware',
+            es: 'Ferretería'
+        },
+        descripcion: {
+            en: 'Everything you need for your home projects and repairs. Reliable tools, durable materials and the advice you need to make your ideas a reality. At Familia Market, your project is our project.',
+            es: 'Todo lo que necesitas para tus proyectos y reparaciones del hogar. Herramientas confiables, materiales duraderos y el asesoramiento que necesitas para hacer realidad tus ideas. En Familia Market, tu proyecto es nuestro proyecto.'
+        },
+        imagenes: ['ferreteria/ferreteria-1', 'ferreteria/ferreteria-2', 'ferreteria/ferreteria-3', 'ferreteria/ferreteria-4']
     },
     'bebidas': {
-        titulo: 'Beverages',
-        imagenes: ['bebidas-1', 'bebidas-2', 'bebidas-3', 'bebidas-4'],
-        descripcion: 'From refreshing drinks for daily use to special selections for your celebrations. Find the perfect drink for every moment, always with responsibility and variety that surprises.'
+        titulo: {
+            en: 'Beverages',
+            es: 'Bebidas'
+        },
+        descripcion: {
+            en: 'From refreshing drinks for daily use to special selections for your celebrations. Find the perfect drink for every moment, always with responsibility and variety that surprises.',
+            es: 'Desde bebidas refrescantes para el diario vivir hasta selecciones especiales para tus celebraciones. Encuentra la bebida perfecta para cada momento, siempre con responsabilidad y variedad que sorprende.'
+        },
+        imagenes: ['bebidas/bebidas-1', 'bebidas/bebidas-2', 'bebidas/bebidas-3', 'bebidas/bebidas-4']
     },
     'comestibles': {
-        titulo: 'Food Items',
-        imagenes: ['comestibles-1', 'comestibles-2', 'comestibles-3', 'comestibles-4'],
-        descripcion: 'The freshest and most delicious foods for your family. We carefully select each product to guarantee flavor and nutrition in every bite. From fruits and vegetables to ready-to-enjoy products.'
+        titulo: {
+            en: 'Food Items',
+            es: 'Comestibles'
+        },
+        descripcion: {
+            en: 'The freshest and most delicious foods for your family. We carefully select each product to guarantee flavor and nutrition in every bite. From fruits and vegetables to ready-to-enjoy products.',
+            es: 'Los alimentos más frescos y deliciosos para tu familia. Seleccionamos cuidadosamente cada producto para garantizar sabor y nutrición en cada bocado. Desde frutas y vegetales hasta productos listos para disfrutar.'
+        },
+        imagenes: ['comestibles/comestibles-1', 'comestibles/comestibles-2', 'comestibles/comestibles-3', 'comestibles/comestibles-4']
     },
     'snacks': {
-        titulo: 'Snacks',
-        imagenes: ['snacks-1', 'snacks-2', 'snacks-3', 'snacks-4'],
-        descripcion: 'For those special moments or the daily craving, we have the best selection of national and international snacks. Find from your childhood favorites to new flavor experiences.'
+        titulo: {
+            en: 'Snacks',
+            es: 'Snacks'
+        },
+        descripcion: {
+            en: 'For those special moments or the daily craving, we have the best selection of national and international snacks. Find from your childhood favorites to new flavor experiences.',
+            es: 'Para esos momentos especiales o el antojo diario, tenemos la mejor selección de snacks nacionales e internacionales. Encuentra desde tus favoritos de la infancia hasta nuevas experiencias de sabor.'
+        },
+        imagenes: ['snacks/snacks-1', 'snacks/snacks-2', 'snacks/snacks-3', 'snacks/snacks-4']
     },
     'higiene': {
-        titulo: 'Hygiene and Personal Care',
-        imagenes: ['higiene-1', 'higiene-2', 'higiene-3', 'higiene-4'],
-        descripcion: 'Your well-being is our priority. We offer a complete range of personal hygiene and care products that take care of you and your family. Quality and trust in every product.'
+        titulo: {
+            en: 'Hygiene and Personal Care',
+            es: 'Higiene y Cuidado Personal'
+        },
+        descripcion: {
+            en: 'Your well-being is our priority. We offer a complete range of personal hygiene and care products that take care of you and your family. Quality and trust in every product.',
+            es: 'Tu bienestar es nuestra prioridad. Ofrecemos una gama completa de productos de higiene personal y cuidado que cuidan de ti y tu familia. Calidad y confianza en cada producto.'
+        },
+        imagenes: ['higiene/higiene-1', 'higiene/higiene-2', 'higiene/higiene-3', 'higiene/higiene-4']
     },
     'hogar': {
-        titulo: 'Home',
-        imagenes: ['hogar-1', 'hogar-2', 'hogar-3', 'hogar-4'],
-        descripcion: 'Everything you need to make your home a comfortable and cozy space. From cleaning products to decoration, we have the essentials to keep your house impeccable.'
+        titulo: {
+            en: 'Home',
+            es: 'Hogar'
+        },
+        descripcion: {
+            en: 'Everything you need to make your home a comfortable and cozy space. From cleaning products to decoration, we have the essentials to keep your house impeccable.',
+            es: 'Todo lo que necesitas para hacer de tu hogar un espacio cómodo y acogedor. Desde productos de limpieza hasta decoración, tenemos lo esencial para mantener tu casa impecable.'
+        },
+        imagenes: ['hogar/hogar-1', 'hogar/hogar-2', 'hogar/hogar-3', 'hogar/hogar-4']
     },
     'promociones': {
-        titulo: 'Promotions / Specials',
-        imagenes: ['promociones-1', 'promociones-2', 'promociones-3', 'promociones-4'],
-        descripcion: 'Take advantage of our exclusive offers! At Familia Market we always have special promotions so you can save while enjoying quality products. Visit us frequently and discover new opportunities every week.'
+        titulo: {
+            en: 'Promotions / Specials',
+            es: 'Promociones / Ofertas'
+        },
+        descripcion: {
+            en: 'Take advantage of our exclusive offers! At Familia Market we always have special promotions so you can save while enjoying quality products. Visit us frequently and discover new opportunities every week.',
+            es: '¡Aprovecha nuestras ofertas exclusivas! En Familia Market siempre tenemos promociones especiales para que ahorres mientras disfrutas de productos de calidad. Visítanos frecuentemente y descubre nuevas oportunidades cada semana.'
+        },
+        imagenes: ['promociones/promociones-1', 'promociones/promociones-2', 'promociones/promociones-3', 'promociones/promociones-4']
     },
     'otros': {
-        titulo: 'Other Featured Products',
-        imagenes: ['otros-1', 'otros-2', 'otros-3', 'otros-4'],
-        descripcion: 'Discover our special selection of unique and featured products. We are always incorporating novelties to surprise you and offer you more options for your daily life.'
+        titulo: {
+            en: 'Other Featured Products',
+            es: 'Otros Productos Destacados'
+        },
+        descripcion: {
+            en: 'Discover our special selection of unique and featured products. We are always incorporating novelties to surprise you and offer you more options for your daily life.',
+            es: 'Descubre nuestra selección especial de productos únicos y destacados. Siempre estamos incorporando novedades para sorprenderte y ofrecerte más opciones para tu vida diaria.'
+        },
+        imagenes: ['otros/otros-1', 'otros/otros-2', 'otros/otros-3', 'otros/otros-4']
     }
 };
 
@@ -651,31 +716,41 @@ function mostrarCategoria(categoriaId) {
     historialNavegacion.push(currentPage);
     const categoria = categorias[categoriaId];
     if (!categoria) return;
+    
+    const idioma = obtenerIdiomaActual();
+    const textos = {
+        back: idioma === 'es' ? '← Volver' : '← Back',
+        everythingIn: idioma === 'es' ? 'Todo en' : 'Everything in',
+        qualityQuote: idioma === 'es' ? 
+            '"Calidad que notas, precios que agradeces"' : 
+            '"Quality you notice, prices you appreciate"',
+        whereToFind: idioma === 'es' ? '¿Dónde Encontrarnos?' : 'Where to Find Us?'
+    };
 
     const html = `
         <section id="categoria-${categoriaId}" class="pagina activa">
             <div class="pagina-interna">
-                <button class="btn-atras" onclick="volverAtras()">← Back</button>
-                <h1 class="titulo-pagina">${categoria.titulo}</h1>
+                <button class="btn-atras" onclick="volverAtras()">${textos.back}</button>
+                <h1 class="titulo-pagina">${categoria.titulo[idioma]}</h1>
                 <div class="grid-imagenes">
                     <div class="fila-completa">
-                        <img src="images/categorias/${categoria.imagenes[0]}.webp" alt="${categoria.titulo}" class="imagen-grande" width="1200" height="450" loading="lazy">
+                        <img src="images/categorias/${categoria.imagenes[0]}.webp" alt="${categoria.titulo[idioma]}" class="imagen-grande" width="1200" height="450" loading="lazy">
                     </div>
                     <div class="fila-mitad">
-                        <img src="images/categorias/${categoria.imagenes[1]}.webp" alt="${categoria.titulo}" class="imagen-pequena" width="800" height="350" loading="lazy">
-                        <img src="images/categorias/${categoria.imagenes[2]}.webp" alt="${categoria.titulo}" class="imagen-pequena" width="800" height="350" loading="lazy">
+                        <img src="images/categorias/${categoria.imagenes[1]}.webp" alt="${categoria.titulo[idioma]}" class="imagen-pequena" width="800" height="350" loading="lazy">
+                        <img src="images/categorias/${categoria.imagenes[2]}.webp" alt="${categoria.titulo[idioma]}" class="imagen-pequena" width="800" height="350" loading="lazy">
                     </div>
                     <div class="fila-completa">
-                        <img src="images/categorias/${categoria.imagenes[3]}.webp" alt="${categoria.titulo}" class="imagen-grande" width="1200" height="450" loading="lazy">
+                        <img src="images/categorias/${categoria.imagenes[3]}.webp" alt="${categoria.titulo[idioma]}" class="imagen-grande" width="1200" height="450" loading="lazy">
                     </div>
                 </div>
                 <div class="texto-categoria">
-                    <h2>Everything in ${categoria.titulo}</h2>
-                    <p class="descripcion-categoria">${categoria.descripcion}</p>
+                    <h2>${textos.everythingIn} ${categoria.titulo[idioma]}</h2>
+                    <p class="descripcion-categoria">${categoria.descripcion[idioma]}</p>
                     <p style="margin-top: 20px; font-style: italic; color: var(--color-texto-suave);">
-                        "Quality you notice, prices you appreciate"
+                        ${textos.qualityQuote}
                     </p>
-                    <button class="btn-donde-encontrarnos" onclick="mostrarPagina('mis-tiendas')">Where to Find Us?</button>
+                    <button class="btn-donde-encontrarnos" onclick="mostrarPagina('mis-tiendas')">${textos.whereToFind}</button>
                 </div>
             </div>
         </section>
