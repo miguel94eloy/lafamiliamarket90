@@ -1,6 +1,5 @@
 User-agent: *
 Allow: /
-Crawl-delay: 1
 
 # Sitemap location
 Sitemap: https://lafamiliamarket90.com/sitemap.xml
