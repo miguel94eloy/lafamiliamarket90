@@ -1729,6 +1729,28 @@ body {
 .logo-grande {
     object-fit: contain;
 }
+/* FORZAR VISIBILIDAD IMÁGENES RESPONSIVE */
+@media (max-width: 768px) {
+    .img-pc {
+        display: none !important;
+    }
+    .img-movil {
+        display: block !important;
+        width: 100% !important;
+        height: auto !important;
+    }
+}
+
+@media (min-width: 769px) {
+    .img-pc {
+        display: block !important;
+        width: 100% !important;
+        height: auto !important;
+    }
+    .img-movil {
+        display: none !important;
+    }
+}
 /* ================================================ */
 /* FIX DEFINITIVO MAPA LEAFLET - VERSIÓN MEJORADA */
 /* ================================================ */
