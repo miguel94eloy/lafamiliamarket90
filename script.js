@@ -72,16 +72,16 @@ const categorias = {
 },
 
     'snacks': {
-        titulo: {
-            en: 'Snacks',
-            es: 'Snacks'
-        },
-        descripcion: {
-            en: 'For those special moments or the daily craving, we have the best selection of national and international snacks. Find from your childhood favorites to new flavor experiences.',
-            es: 'Para esos momentos especiales o el antojo diario, tenemos la mejor selección de snacks nacionales e internacionales. Encuentra desde tus favoritos de la infancia hasta nuevas experiencias de sabor.'
-        },
-        imagenes: ['snacks/snacks-1', 'snacks/snacks-2', 'snacks/snacks-3', 'snacks/snacks-4']
+    titulo: {
+        en: 'Snacks & Fast Food',
+        es: 'Snacks & Comida Rápida'
     },
+    descripcion: {
+        en: 'Perfect for quick cravings or on-the-go meals. We offer a wide variety of snacks and fast food options that satisfy your hunger instantly. From classic chips and candies to ready-to-eat sandwiches and hot food, we have everything you need for a quick and delicious bite.',
+        es: 'Perfecto para antojos rápidos o comidas sobre la marcha. Ofrecemos una amplia variedad de snacks y opciones de comida rápida que satisfacen tu hambre al instante. Desde clásicas papas y dulces hasta sándwiches listos para comer y comida caliente, tenemos todo lo que necesitas para un bocado rápido y delicioso.'
+    },
+    imagenes: ['snacks/snacks-1', 'snacks/snacks-2', 'snacks/snacks-3', 'snacks/snacks-4']
+},
     'higiene': {
         titulo: {
             en: 'Hygiene and Personal Care',
