@@ -5,6 +5,13 @@
     box-sizing: border-box;
 }
 
+/* FIX SCROLL HORIZONTAL Y FRANJA BLANCA */
+html, body {
+    overflow-x: hidden;
+    max-width: 100%;
+    position: relative;
+}
+
 :root {
     --color-negro: #000000;
     --color-rojo: #ed1c24;
@@ -204,6 +211,8 @@ body {
 /* CONTENIDO PRINCIPAL */
 .contenido-principal {
     min-height: 70vh;
+    overflow-x: hidden;
+    max-width: 100%;
 }
 
 /* PÁGINA OCULTA POR DEFECTO */
@@ -285,10 +294,10 @@ body {
 }
 
 .slider-btn {
-    background: rgba(255,255,255,0.9);
+    background: rgba(255,255,255,0.5);
     border: none;
-    width: 50px;
-    height: 50px;
+    width: 30px;
+    height: 30px;
     border-radius: 50%;
     font-size: 1.5rem;
     cursor: pointer;
@@ -355,7 +364,6 @@ body {
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
-   
 }
 
 .subtitulo {
@@ -630,18 +638,16 @@ body {
     display: grid;
     gap: 10px;
     margin-bottom: 50px;
-    max-width: 1200px; /* AGREGAR para centrar */
-    margin-left: auto; /* AGREGAR para centrar */
-    margin-right: auto; /* AGREGAR para centrar */
+    max-width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .fila-completa {
     grid-column: 1 / -1;
     width: 100%;
-    display: block !important;           /* AGREGAR */
-    min-width: 100% !important;          /* AGREGAR */
-    min-width: 100% !important;          /* AGREGAR */
-    
+    display: block !important;
+    min-width: 100% !important;
 }
 
 .fila-mitad {
@@ -652,8 +658,8 @@ body {
 
 .imagen-grande {
     width: 100%;
-    height: auto;               /* CAMBIAR: de 450px a auto */
-    aspect-ratio: 4/3;          /* AGREGAR esta línea */
+    height: auto;
+    aspect-ratio: 4/3;
     object-fit: cover;
     border-radius: 20px;
     transition: var(--transicion);
@@ -662,8 +668,8 @@ body {
 
 .imagen-pequena {
     width: 100%;
-    height: auto;               /* CAMBIAR: de 350px a auto */
-    aspect-ratio: 3/2;          /* AGREGAR esta línea */
+    height: auto;
+    aspect-ratio: 3/2;
     object-fit: cover;
     border-radius: 20px;
     transition: var(--transicion);
@@ -931,6 +937,8 @@ body {
     display: none;
     flex-direction: column;
     gap: 10px;
+    max-width: 100vw;
+    right: min(20px, calc(100vw - 70px));
 }
 
 .boton-flotante {
@@ -1180,6 +1188,9 @@ body {
     color: var(--color-blanco);
     padding: 40px 5% 30px;
     margin-top: 60px;
+    width: 100%;
+    max-width: 100vw;
+    overflow: hidden;
 }
 
 .footer-contenido {
@@ -1463,21 +1474,18 @@ body {
         padding-left: 25px;
     }
 }
-/* 🎯 AGREGAR ESTO - ALTURA SLIDER MÓVIL */
+
+/* ALTURA SLIDER MÓVIL */
 @media (max-width: 768px) {
     .slider-portada {
-        height: 15vh !important;  /* Más bajo */
+        height: 35vh !important;
     }
     
     #slider-especiales .slider-portada,
     #sobre-tienda-container .slider-portada {
-        height: 40vh !important;  /* Más bajo */
+        height: 40vh !important;
     }
 }
-
-/* BANNER LOGOS MÓVIL */
-@media (max-width: 768px) {
-    .logos-principales {
 
 /* BANNER LOGOS MÓVIL */
 @media (max-width: 768px) {
@@ -1612,37 +1620,36 @@ body {
 /* TEXTOS MÓVIL */
 @media (max-width: 768px) {
     .titulo-principal {
-        font-size: 1.1rem !important;  /* Más pequeño */
-        margin-bottom: 15px !important; /* Menos espacio abajo */
-        line-height: 1.2 !important;    /* Menos altura entre líneas */
+        font-size: 1.6rem !important;
+        margin-bottom: 15px !important;
+        line-height: 1.2 !important;
     }
 
     .titulo-pagina {
-        font-size: 1.8rem !important;
-        margin-bottom: 30px !important; /* Menos espacio abajo */
+        font-size: 1.6rem !important;
+        margin-bottom: 30px !important;
     }
 
     .titulo-seccion {
-        font-size: 1.6rem !important;   /* Más pequeño */
-        margin-bottom: 25px !important; /* Menos espacio abajo */
+        font-size: 1.4rem !important;
+        margin-bottom: 25px !important;
     }
 
     .subtitulo {
-        font-size: 1rem !important;     /* Más pequeño */
-        margin-bottom: 20px !important; /* Menos espacio abajo */
-        line-height: 1.4 !important;    /* Menos altura entre líneas */
+        font-size: 1rem !important;
+        margin-bottom: 20px !important;
+        line-height: 1.4 !important;
+    }
+ /* AGREGAR ESTO PARA SUBIR EL H1 */
+    .seccion-promocional {
+        padding: 20px 5% !important;  /* ← MENOS PADDING ARRIBA = H1 MÁS ARRIBA */
     }
 }
 
-/* RESPONSIVE COMPLETO OPTIMIZADO */
+/* RESPONSIVE SIMPLIFICADO */
 @media (max-width: 1200px) {
     .contenedor-circulos {
         grid-template-columns: repeat(4, 1fr);
-        gap: 15px;
-    }
-    
-    .item-circulo:nth-child(-n+10) {
-        grid-column: auto;
     }
 }
 
@@ -1650,7 +1657,7 @@ body {
     .tarjetas-tiendas {
         grid-template-columns: repeat(2, 1fr);
     }
-            
+    
     .contenedor-circulos {
         grid-template-columns: repeat(3, 1fr);
     }
@@ -1704,28 +1711,16 @@ body {
         gap: 20px;
     }
     
-    /* CÍRCULOS EN 2 COLUMNAS PARA MÓVIL - MÁS ESPECÍFICO */
-    .seccion-circulos .contenedor-circulos {
+    /* CÍRCULOS EN 2 COLUMNAS PARA MÓVIL */
+    .contenedor-circulos {
         grid-template-columns: repeat(2, 1fr) !important;
-        gap: 20px !important;
-        max-width: 400px !important;
-        margin: 0 auto !important;
+        max-width: 400px;
+        margin: 0 auto;
     }
     
-    /* Resetear TODAS las posiciones de grid para móvil */
-    .seccion-circulos .contenedor-circulos .item-circulo,
-    .seccion-circulos .contenedor-circulos .item-circulo:nth-child(1),
-    .seccion-circulos .contenedor-circulos .item-circulo:nth-child(2),
-    .seccion-circulos .contenedor-circulos .item-circulo:nth-child(3),
-    .seccion-circulos .contenedor-circulos .item-circulo:nth-child(4),
-    .seccion-circulos .contenedor-circulos .item-circulo:nth-child(5),
-    .seccion-circulos .contenedor-circulos .item-circulo:nth-child(6),
-    .seccion-circulos .contenedor-circulos .item-circulo:nth-child(7),
-    .seccion-circulos .contenedor-circulos .item-circulo:nth-child(8),
-    .seccion-circulos .contenedor-circulos .item-circulo:nth-child(9),
-    .seccion-circulos .contenedor-circulos .item-circulo:nth-child(10) {
+    /* RESET COMPLETO DE POSICIONES */
+    .item-circulo {
         grid-column: auto !important;
-        grid-row: auto !important;
     }
 }
 
@@ -1757,11 +1752,11 @@ body {
     }
     
     .titulo-principal {
-        font-size: 1.8rem;
+        font-size: 1.4rem !important;
     }
     
     .titulo-pagina {
-        font-size: 1.8rem;
+        font-size: 1.4rem !important;
     }
 
     .testimonio-card {
@@ -1769,17 +1764,20 @@ body {
     }
     
     /* Para móviles muy pequeños */
-    .seccion-circulos .contenedor-circulos {
-        gap: 15px !important;
-        max-width: 350px !important;
+    .contenedor-circulos {
+        grid-template-columns: repeat(2, 1fr) !important;
+        max-width: 350px;
+        gap: 15px;
     }
 }
+
 /* EVITA DISTORSIÓN EN LOGOS */
 .logo-principal,
 .logo-secundario,
 .logo-grande {
     object-fit: contain;
 }
+
 /* FORZAR VISIBILIDAD IMÁGENES RESPONSIVE */
 @media (max-width: 768px) {
     .img-pc {
@@ -1802,6 +1800,7 @@ body {
         display: none !important;
     }
 }
+
 /* ================================================ */
 /* FIX DEFINITIVO MAPA LEAFLET - VERSIÓN MEJORADA */
 /* ================================================ */
