@@ -59,17 +59,18 @@ const categorias = {
         },
         imagenes: ['bebidas/bebidas-1', 'bebidas/bebidas-2', 'bebidas/bebidas-3', 'bebidas/bebidas-4']
     },
-    'comestibles': {
-        titulo: {
-            en: 'Food Items',
-            es: 'Comestibles'
-        },
-        descripcion: {
-            en: 'The freshest and most delicious foods for your family. We carefully select each product to guarantee flavor and nutrition in every bite. From fruits and vegetables to ready-to-enjoy products.',
-            es: 'Los alimentos más frescos y deliciosos para tu familia. Seleccionamos cuidadosamente cada producto para garantizar sabor y nutrición en cada bocado. Desde frutas y vegetales hasta productos listos para disfrutar.'
-        },
-        imagenes: ['comestibles/comestibles-1', 'comestibles/comestibles-2', 'comestibles/comestibles-3', 'comestibles/comestibles-4']
+    'tabaco': {
+    titulo: {
+        en: 'Tobacco & Accessories',
+        es: 'Tabaco y Accesorios'
     },
+    descripcion: {
+        en: 'Discover a space designed for true tobacco connoisseurs. At La Familia Market, we offer a diverse selection of products and accessories reflecting style, sophistication, and quality. From modern vaporizers and elegant pipes to lighters, rolling papers, and essentials, every detail is crafted for those who value a unique experience.',
+        es: 'Descubre un espacio diseñado para verdaderos conocedores del tabaco. En La Familia Market reunimos una selección diversa de productos y accesorios que reflejan estilo, sofisticación y calidad. Desde vaporizadores modernos y pipas elegantes hasta encendedores, papeles para liar y artículos esenciales, cada detalle está pensado para quienes valoran una experiencia única.'
+    },
+    imagenes: ['tabaco/tabaco-1', 'tabaco/tabaco-2', 'tabaco/tabaco-3', 'tabaco/tabaco-4']
+},
+
     'snacks': {
         titulo: {
             en: 'Snacks',
