@@ -224,13 +224,13 @@ body {
 /* SLIDER PORTADA MEJORADO */
 .slider-portada {
     position: relative;
-    height: 70vh;
+    height: 60vh;
     overflow: hidden;
 }
 
 #slider-especiales .slider-portada,
 #sobre-tienda-container .slider-portada {
-    height: 70vh;
+    height: 60vh;
 }
 
 .slider-track {
@@ -341,7 +341,7 @@ body {
 /* SECCIÓN PROMOCIONAL PREMIUM */
 .seccion-promocional {
     text-align: center;
-    padding: 80px 5%;
+    padding: 30px 5%;
     background: var(--color-blanco);
 }
 
@@ -355,6 +355,7 @@ body {
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
+   
 }
 
 .subtitulo {
@@ -1462,6 +1463,21 @@ body {
         padding-left: 25px;
     }
 }
+/* 🎯 AGREGAR ESTO - ALTURA SLIDER MÓVIL */
+@media (max-width: 768px) {
+    .slider-portada {
+        height: 15vh !important;  /* Más bajo */
+    }
+    
+    #slider-especiales .slider-portada,
+    #sobre-tienda-container .slider-portada {
+        height: 40vh !important;  /* Más bajo */
+    }
+}
+
+/* BANNER LOGOS MÓVIL */
+@media (max-width: 768px) {
+    .logos-principales {
 
 /* BANNER LOGOS MÓVIL */
 @media (max-width: 768px) {
@@ -1596,19 +1612,25 @@ body {
 /* TEXTOS MÓVIL */
 @media (max-width: 768px) {
     .titulo-principal {
-        font-size: 2rem !important;
+        font-size: 1.1rem !important;  /* Más pequeño */
+        margin-bottom: 15px !important; /* Menos espacio abajo */
+        line-height: 1.2 !important;    /* Menos altura entre líneas */
     }
 
     .titulo-pagina {
-        font-size: 2rem !important;
+        font-size: 1.8rem !important;
+        margin-bottom: 30px !important; /* Menos espacio abajo */
     }
 
     .titulo-seccion {
-        font-size: 1.8rem !important;
+        font-size: 1.6rem !important;   /* Más pequeño */
+        margin-bottom: 25px !important; /* Menos espacio abajo */
     }
 
     .subtitulo {
-        font-size: 1.1rem !important;
+        font-size: 1rem !important;     /* Más pequeño */
+        margin-bottom: 20px !important; /* Menos espacio abajo */
+        line-height: 1.4 !important;    /* Menos altura entre líneas */
     }
 }
 
@@ -1681,6 +1703,30 @@ body {
         grid-template-columns: 1fr;
         gap: 20px;
     }
+    
+    /* CÍRCULOS EN 2 COLUMNAS PARA MÓVIL - MÁS ESPECÍFICO */
+    .seccion-circulos .contenedor-circulos {
+        grid-template-columns: repeat(2, 1fr) !important;
+        gap: 20px !important;
+        max-width: 400px !important;
+        margin: 0 auto !important;
+    }
+    
+    /* Resetear TODAS las posiciones de grid para móvil */
+    .seccion-circulos .contenedor-circulos .item-circulo,
+    .seccion-circulos .contenedor-circulos .item-circulo:nth-child(1),
+    .seccion-circulos .contenedor-circulos .item-circulo:nth-child(2),
+    .seccion-circulos .contenedor-circulos .item-circulo:nth-child(3),
+    .seccion-circulos .contenedor-circulos .item-circulo:nth-child(4),
+    .seccion-circulos .contenedor-circulos .item-circulo:nth-child(5),
+    .seccion-circulos .contenedor-circulos .item-circulo:nth-child(6),
+    .seccion-circulos .contenedor-circulos .item-circulo:nth-child(7),
+    .seccion-circulos .contenedor-circulos .item-circulo:nth-child(8),
+    .seccion-circulos .contenedor-circulos .item-circulo:nth-child(9),
+    .seccion-circulos .contenedor-circulos .item-circulo:nth-child(10) {
+        grid-column: auto !important;
+        grid-row: auto !important;
+    }
 }
 
 @media (max-width: 480px) {
@@ -1721,8 +1767,13 @@ body {
     .testimonio-card {
         padding: 20px;
     }
+    
+    /* Para móviles muy pequeños */
+    .seccion-circulos .contenedor-circulos {
+        gap: 15px !important;
+        max-width: 350px !important;
+    }
 }
-
 /* EVITA DISTORSIÓN EN LOGOS */
 .logo-principal,
 .logo-secundario,
