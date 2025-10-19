@@ -1389,8 +1389,8 @@ body {
     .mobile-dropdown {
         position: fixed;
         top: 110px;
-        left: 0;
-        right: 0;
+        left: 5%;
+        right: 5%;
         background: rgba(255,255,255,0.98);
         backdrop-filter: blur(20px);
         z-index: 1002;
@@ -1398,40 +1398,41 @@ body {
         overflow: hidden;
         transition: max-height 0.4s ease;
         box-shadow: 0 5px 25px rgba(0,0,0,0.15);
+        border-radius: 15px;
+        width: 90%;
     }
 
     .mobile-dropdown.abierto {
-    max-height: 500px !important; /* ← Aumenta a 500px */
-    overflow-y: auto !important;  /* ← Agrega scroll aquí también */
-}
-
-    .mobile-dropdown-content {
-        padding: 20px;
-        max-height: 65vh; /* Altura máxima del contenido */
-        overflow-y: auto; /* Scroll en el contenido */
+        max-height: 500px;
+        overflow-y: auto;
+        -webkit-overflow-scrolling: touch;
     }
 
-    /* SCROLL SUAVE PARA CONTENIDO DEL DROPDOWN */
-    .mobile-dropdown-content {
+    /* SCROLL SUAVE PARA DROPDOWN MÓVIL */
+    .mobile-dropdown.abierto {
         scrollbar-width: thin;
         scrollbar-color: var(--color-rojo) transparent;
     }
 
-    .mobile-dropdown-content::-webkit-scrollbar {
+    .mobile-dropdown.abierto::-webkit-scrollbar {
         width: 6px;
     }
 
-    .mobile-dropdown-content::-webkit-scrollbar-track {
+    .mobile-dropdown.abierto::-webkit-scrollbar-track {
         background: transparent;
     }
 
-    .mobile-dropdown-content::-webkit-scrollbar-thumb {
+    .mobile-dropdown.abierto::-webkit-scrollbar-thumb {
         background: var(--color-rojo);
         border-radius: 3px;
     }
 
-    .mobile-dropdown-content::-webkit-scrollbar-thumb:hover {
+    .mobile-dropdown.abierto::-webkit-scrollbar-thumb:hover {
         background: var(--color-hover);
+    }
+
+    .mobile-dropdown-content {
+        padding: 20px;
     }
 
     .mobile-dropdown-link {
@@ -1459,65 +1460,6 @@ body {
         background: var(--color-gris-claro);
         color: var(--color-rojo);
         padding-left: 25px;
-    }
-}
-
-/* 🎯 SCROLL PARA CATEGORÍAS MÓVIL - AGREGAR AQUÍ */
-@media (max-width: 768px) {
-    #dropdown-categorias.mobile-dropdown {
-        overflow: visible !important;
-    }
-    
-    #dropdown-categorias.abierto {
-        max-height: 500px !important;  /* ← CAMBIA a 500px fijo */
-        overflow-y: auto !important;
-        -webkit-overflow-scrolling: touch !important;
-    }
-
-    #dropdown-categorias.abierto {
-        scrollbar-width: thin !important;
-        scrollbar-color: var(--color-rojo) transparent !important;
-    }
-
-    #dropdown-categorias.abierto::-webkit-scrollbar {
-        width: 6px !important;
-    }
-
-    #dropdown-categorias.abierto::-webkit-scrollbar-track {
-        background: transparent !important;
-    }
-
-    #dropdown-categorias.abierto::-webkit-scrollbar-thumb {
-        background: var(--color-rojo) !important;
-        border-radius: 3px !important;
-    }
-
-    #dropdown-categorias.abierto::-webkit-scrollbar-thumb:hover {
-        background: var(--color-hover) !important;
-    }
-}
-
-/* PORTADAS MÓVIL OPTIMIZADAS */
-@media (max-width: 768px) {
-    .img-pc {
-        display: none !important;
-    }
-    .img-movil {
-        display: block !important;
-    }
-
-    .slider-portada {
-        height: 40vh !important;
-    }
-
-    #slider-especiales .slider-portada,
-    #sobre-tienda-container .slider-portada {
-        height: 50vh !important;
-    }
-
-    .slide-img.img-movil {
-        object-fit: contain !important;
-        background: var(--color-gris-claro);
     }
 }
 
