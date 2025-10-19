@@ -131,19 +131,37 @@ const categorias = {
 // CONFIGURACIÓN SOBRE TIENDA CON INFO INTEGRADA
 const sobreTiendas = {
     'sobre-tienda1': {
-        titulo: 'Familia Market - Miami Gardens',
+        titulo: {
+            en: 'Familia Market - Miami Gardens',
+            es: 'Familia Market - Miami Gardens'
+        },
         imagenes: ['sobre-tienda1-portada-1', 'sobre-tienda1-portada-2'],
-        descripcion: 'Our store in Miami Gardens is much more than a commercial establishment: it is the heart of the community. With years of experience serving families in the area, we have become the trusted place where you find from basic products to international services that connect your family with the world. We are your trusted grocery store, but we also function as convenience store, liquor store, tobacco shop, sandwich shop and foodstand all in one. Remember that we do not accept delivery - we await you in our physical store to serve you personally. Phone: 786 661 8524. Our bilingual team is always ready to help you with a smile and the knowledge you need.'
+        descripcion: {
+            en: 'Our store in Miami Gardens is much more than a commercial establishment: it is the heart of the community. With years of experience serving families in the area, we have become the trusted place where you find from basic products to international services that connect your family with the world. We are your trusted grocery store, but we also function as convenience store, liquor store, tobacco shop, sandwich shop and foodstand all in one. Remember that we do not accept delivery - we await you in our physical store to serve you personally. Phone: 786 661 8524. Our bilingual team is always ready to help you with a smile and the knowledge you need.',
+            es: 'Nuestra tienda en Miami Gardens es mucho más que un establecimiento comercial: es el corazón de la comunidad. Con años de experiencia sirviendo a familias en el área, nos hemos convertido en el lugar de confianza donde encuentras desde productos básicos hasta servicios internacionales que conectan a tu familia con el mundo. Somos tu supermercado de confianza, pero también funcionamos como tienda de conveniencia, licorería, tabaquería, sandwich shop y comida rápida todo en uno. Recuerda que no aceptamos delivery - te esperamos en nuestra tienda física para servirte personalmente. Teléfono: 786 661 8524. Nuestro equipo bilingüe siempre está listo para ayudarte con una sonrisa y el conocimiento que necesitas.'
+        }
     },
     'sobre-tienda2': {
-        titulo: 'Familia Market - Allapattah',
+        titulo: {
+            en: 'Familia Market - Allapattah',
+            es: 'Familia Market - Allapattah'
+        },
         imagenes: ['sobre-tienda2-portada-1', 'sobre-tienda2-portada-2'],
-        descripcion: 'Located in the vibrant heart of Allapattah, our store specializes in offering a wide variety of products and services for the whole family. But that\'s not all: we also offer all the international services you need to stay connected with your loved ones. At Familia Market Allapattah we are more than a grocery store - we are your trusted convenience store, liquor store, tobacco shop, sandwich shop and foodstand. Important: we do not accept delivery, all purchases must be made in our physical store. Phone: 786 661 8524. Come and discover why we are the preferred choice of those looking for quality and exceptional service.'
+        descripcion: {
+            en: 'Located in the vibrant heart of Allapattah, our store specializes in offering a wide variety of products and services for the whole family. But that\'s not all: we also offer all the international services you need to stay connected with your loved ones. At Familia Market Allapattah we are more than a grocery store - we are your trusted convenience store, liquor store, tobacco shop, sandwich shop and foodstand. Important: we do not accept delivery, all purchases must be made in our physical store. Phone: 786 661 8524. Come and discover why we are the preferred choice of those looking for quality and exceptional service.',
+            es: 'Ubicada en el vibrante corazón de Allapattah, nuestra tienda se especializa en ofrecer una amplia variedad de productos y servicios para toda la familia. Pero eso no es todo: también ofrecemos todos los servicios internacionales que necesitas para mantenerte conectado con tus seres queridos. En Familia Market Allapattah somos más que un supermercado - somos tu tienda de conveniencia, licorería, tabaquería, sandwich shop y comida rápida de confianza. Importante: no aceptamos delivery, todas las compras deben realizarse en nuestra tienda física. Teléfono: 786 661 8524. Ven y descubre por qué somos la opción preferida de quienes buscan calidad y servicio excepcional.'
+        }
     },
     'sobre-tienda3': {
-        titulo: 'Familia Market - South Miami Heights',
+        titulo: {
+            en: 'Familia Market - South Miami Heights', 
+            es: 'Familia Market - South Miami Heights'
+        },
         imagenes: ['sobre-tienda3-portada-1', 'sobre-tienda3-portada-2'],
-        descripcion: 'In South Miami Heights, our store stands out for its ample parking, easy access and the best selection of personal hygiene and home care products. We are the ideal destination for families who value comfort, variety and that personalized treatment that characterizes us. As your trusted grocery store, we offer everything you need: from basic groceries to convenience store, liquor store, tobacco shop, sandwich shop and foodstand services. 🚫 We do not accept delivery - visit us at our physical location. Phone: 786 661 8524. With years of experience serving the community, we know exactly what your family needs and we are proud to offer it to you.'
+        descripcion: {
+            en: 'In South Miami Heights, our store stands out for its ample parking, easy access and the best selection of personal hygiene and home care products. We are the ideal destination for families who value comfort, variety and that personalized treatment that characterizes us. As your trusted grocery store, we offer everything you need: from basic groceries to convenience store, liquor store, tobacco shop, sandwich shop and foodstand services. 🚫 We do not accept delivery - visit us at our physical location. Phone: 786 661 8524. With years of experience serving the community, we know exactly what your family needs and we are proud to offer it to you.',
+            es: 'En South Miami Heights, nuestra tienda se destaca por su amplio estacionamiento, fácil acceso y la mejor selección de productos de higiene personal y cuidado del hogar. Somos el destino ideal para familias que valoran la comodidad, la variedad y ese trato personalizado que nos caracteriza. Como tu supermercado de confianza, ofrecemos todo lo que necesitas: desde comestibles básicos hasta servicios de tienda de conveniencia, licorería, tabaquería, sandwich shop y comida rápida. 🚫 No aceptamos delivery - visítanos en nuestra ubicación física. Teléfono: 786 661 8524. Con años de experiencia sirviendo a la comunidad, sabemos exactamente lo que tu familia necesita y estamos orgullosos de ofrecértelo.'
+        }
     }
 };
 
@@ -772,20 +790,27 @@ function mostrarSobreTienda(tiendaId) {
     const tienda = sobreTiendas[tiendaId];
     if (!tienda) return;
 
+    const idioma = obtenerIdiomaActual();
+    const textos = {
+        back: idioma === 'es' ? '← Atrás' : '← Back',
+        getToKnow: idioma === 'es' ? 'Conoce Nuestra Tienda' : 'Get to Know Our Store',
+        weAwait: idioma === 'es' ? '¡Te esperamos para experimentar personalmente por qué somos diferentes!' : 'We await you to personally experience why we are different!'
+    };
+
     const html = `
         <section id="${tiendaId}" class="pagina activa">
             <div class="pagina-interna">
-                <button class="btn-atras" onclick="volverAtras()">← Back</button>
-                <h1 class="titulo-pagina">${tienda.titulo}</h1>
+                <button class="btn-atras" onclick="volverAtras()">${textos.back}</button>
+                <h1 class="titulo-pagina">${tienda.titulo[idioma]}</h1>
                 <div class="slider-portada" id="slider-${tiendaId}">
                     <div class="slider-track">
                         <div class="slide activo">
-                            <img src="images/sobre-tienda/${tienda.imagenes[0]}.webp" alt="${tienda.titulo}" class="slide-img img-pc" width="1200" height="600" loading="lazy">
-                            <img src="images/portada/Portadas para movil/${tiendaId}-1.webp" alt="${tienda.titulo}" class="slide-img img-movil" width="800" height="400" loading="lazy">
+                            <img src="images/sobre-tienda/${tienda.imagenes[0]}.webp" alt="${tienda.titulo[idioma]}" class="slide-img img-pc" width="1200" height="600" loading="lazy">
+                            <img src="images/portada/Portadas%20para%20movil/${tiendaId}-1.webp" alt="${tienda.titulo[idioma]}" class="slide-img img-movil" width="800" height="400" loading="lazy">
                         </div>
                         <div class="slide">
-                            <img src="images/sobre-tienda/${tienda.imagenes[1]}.webp" alt="${tienda.titulo}" class="slide-img img-pc" width="1200" height="600" loading="lazy">
-                            <img src="images/portada/Portadas para movil/${tiendaId}-2.webp" alt="${tienda.titulo}" class="slide-img img-movil" width="800" height="400" loading="lazy">
+                            <img src="images/sobre-tienda/${tienda.imagenes[1]}.webp" alt="${tienda.titulo[idioma]}" class="slide-img img-pc" width="1200" height="600" loading="lazy">
+                            <img src="images/portada/Portadas%20para%20movil/${tiendaId}-2.webp" alt="${tienda.titulo[idioma]}" class="slide-img img-movil" width="800" height="400" loading="lazy">
                         </div>
                     </div>
                     <div class="slider-controls">
@@ -794,10 +819,10 @@ function mostrarSobreTienda(tiendaId) {
                     </div>
                 </div>
                 <div class="seccion-texto">
-                    <h2>Get to Know Our Store</h2>
-                    <p>${tienda.descripcion}</p>
+                    <h2>${textos.getToKnow}</h2>
+                    <p>${tienda.descripcion[idioma]}</p>
                     <p style="margin-top: 20px; font-weight: 600; color: var(--color-rojo);">
-                        We await you to personally experience why we are different!
+                        ${textos.weAwait}
                     </p>
                 </div>
             </div>
