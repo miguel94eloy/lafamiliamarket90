@@ -1401,11 +1401,37 @@ body {
     }
 
     .mobile-dropdown.abierto {
-        max-height: 400px;
-    }
+    max-height: 500px !important; /* ← Aumenta a 500px */
+    overflow-y: auto !important;  /* ← Agrega scroll aquí también */
+}
 
     .mobile-dropdown-content {
         padding: 20px;
+        max-height: 65vh; /* Altura máxima del contenido */
+        overflow-y: auto; /* Scroll en el contenido */
+    }
+
+    /* SCROLL SUAVE PARA CONTENIDO DEL DROPDOWN */
+    .mobile-dropdown-content {
+        scrollbar-width: thin;
+        scrollbar-color: var(--color-rojo) transparent;
+    }
+
+    .mobile-dropdown-content::-webkit-scrollbar {
+        width: 6px;
+    }
+
+    .mobile-dropdown-content::-webkit-scrollbar-track {
+        background: transparent;
+    }
+
+    .mobile-dropdown-content::-webkit-scrollbar-thumb {
+        background: var(--color-rojo);
+        border-radius: 3px;
+    }
+
+    .mobile-dropdown-content::-webkit-scrollbar-thumb:hover {
+        background: var(--color-hover);
     }
 
     .mobile-dropdown-link {
@@ -1433,6 +1459,41 @@ body {
         background: var(--color-gris-claro);
         color: var(--color-rojo);
         padding-left: 25px;
+    }
+}
+
+/* 🎯 SCROLL PARA CATEGORÍAS MÓVIL - AGREGAR AQUÍ */
+@media (max-width: 768px) {
+    #dropdown-categorias.mobile-dropdown {
+        overflow: visible !important;
+    }
+    
+    #dropdown-categorias.abierto {
+        max-height: 500px !important;  /* ← CAMBIA a 500px fijo */
+        overflow-y: auto !important;
+        -webkit-overflow-scrolling: touch !important;
+    }
+
+    #dropdown-categorias.abierto {
+        scrollbar-width: thin !important;
+        scrollbar-color: var(--color-rojo) transparent !important;
+    }
+
+    #dropdown-categorias.abierto::-webkit-scrollbar {
+        width: 6px !important;
+    }
+
+    #dropdown-categorias.abierto::-webkit-scrollbar-track {
+        background: transparent !important;
+    }
+
+    #dropdown-categorias.abierto::-webkit-scrollbar-thumb {
+        background: var(--color-rojo) !important;
+        border-radius: 3px !important;
+    }
+
+    #dropdown-categorias.abierto::-webkit-scrollbar-thumb:hover {
+        background: var(--color-hover) !important;
     }
 }
 
