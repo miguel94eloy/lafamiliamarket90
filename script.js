@@ -329,24 +329,24 @@ function inicializarMapa() {
     const tiendas = [
         {
             nombre: 'Familia Market - Miami Gardens',
-            lat: 25.948696,
-            lng: -80.244805,
+            lat: 25.94007,
+            lng: -80.2605642,
             direccion: '19139 NW 27th Ave, Miami, FL 33114',
-            enlace: 'https://www.google.com/maps?q=25.79925,-80.24017'
+            enlace: 'https://maps.app.goo.gl/fS89V83GGuPCXW3H6?g_st=awb'
         },
         {
             nombre: 'Familia Market - Allapattah', 
-    lat: 25.79925,
-    lng: -80.24017,
+    lat: 25.7992478,
+    lng: -80.2401648,
     direccion: '2412 NW 27th Ave, Miami, FL 33142',  // ✅ CORRECTA
-    enlace: 'https://www.google.com/maps?q=25.94007,-80.2605642'
+    enlace: 'https://maps.app.goo.gl/eaLx7QGeRJctmPcf7'
         },
         {
     nombre: 'Familia Market - Opa-Locka',
-    lat: 25.8670278,   // CORREGIDO: 25°52'01.3"N
-    lng: -80.2421667,  // CORREGIDO: 80°14'31.8"W  
+    lat: 25.8669296,   
+    lng: -80.2423812,    
     direccion: '10139 NW 27th Ave, North Miami, FL 33147',
-    enlace: 'https://www.google.com/maps?q=25.8670278,-80.2421667'
+    enlace: 'https://maps.app.goo.gl/WkN6czD8dwkXwcL28'
 }
 
     ];
