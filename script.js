@@ -798,36 +798,36 @@ function mostrarSobreTienda(tiendaId) {
     };
 
     const html = `
-        <section id="${tiendaId}" class="pagina activa">
-            <div class="pagina-interna">
-                <button class="btn-atras" onclick="volverAtras()">${textos.back}</button>
-                <h1 class="titulo-pagina">${tienda.titulo[idioma]}</h1>
-                <div class="slider-portada" id="slider-${tiendaId}">
-                    <div class="slider-track">
-                        <div class="slide activo">
-                            <img src="images/sobre-tienda/${tienda.imagenes[0]}.webp" alt="${tienda.titulo[idioma]}" class="slide-img img-pc" width="1200" height="600" loading="lazy">
-                            <img src="images/portada/Portadas%20para%20movil/${tiendaId}-1.webp" alt="${tienda.titulo[idioma]}" class="slide-img img-movil" width="800" height="400" loading="lazy">
-                        </div>
-                        <div class="slide">
-                            <img src="images/sobre-tienda/${tienda.imagenes[1]}.webp" alt="${tienda.titulo[idioma]}" class="slide-img img-pc" width="1200" height="600" loading="lazy">
-                            <img src="images/portada/Portadas%20para%20movil/${tiendaId}-2.webp" alt="${tienda.titulo[idioma]}" class="slide-img img-movil" width="800" height="400" loading="lazy">
-                        </div>
+    <section id="${tiendaId}" class="pagina activa">
+        <div class="pagina-interna">
+            <button class="btn-atras" onclick="volverAtras()">${textos.back}</button>
+            <h1 class="titulo-pagina">${tienda.titulo[idioma]}</h1>
+            <div class="slider-portada" id="slider-${tiendaId}">
+                <div class="slider-track">
+                    <div class="slide activo">
+                        <img src="images/sobre-tienda/${tienda.imagenes[0]}.webp" alt="${tienda.titulo[idioma]}" class="slide-img img-pc" width="1200" height="600" loading="lazy">
+                        <img src="images/sobre-tienda/${tienda.imagenes[0]}.webp" alt="${tienda.titulo[idioma]}" class="slide-img img-movil" width="800" height="400" loading="lazy">
                     </div>
-                    <div class="slider-controls">
-                        <button class="slider-btn prev">‹</button>
-                        <button class="slider-btn next">›</button>
+                    <div class="slide">
+                        <img src="images/sobre-tienda/${tienda.imagenes[1]}.webp" alt="${tienda.titulo[idioma]}" class="slide-img img-pc" width="1200" height="600" loading="lazy">
+                        <img src="images/sobre-tienda/${tienda.imagenes[1]}.webp" alt="${tienda.titulo[idioma]}" class="slide-img img-movil" width="800" height="400" loading="lazy">
                     </div>
                 </div>
-                <div class="seccion-texto">
-                    <h2>${textos.getToKnow}</h2>
-                    <p>${tienda.descripcion[idioma]}</p>
-                    <p style="margin-top: 20px; font-weight: 600; color: var(--color-rojo);">
-                        ${textos.weAwait}
-                    </p>
+                <div class="slider-controls">
+                    <button class="slider-btn prev">‹</button>
+                    <button class="slider-btn next">›</button>
                 </div>
             </div>
-        </section>
-    `;
+            <div class="seccion-texto">
+                <h2>${textos.getToKnow}</h2>
+                <p>${tienda.descripcion[idioma]}</p>
+                <p style="margin-top: 20px; font-weight: 600; color: var(--color-rojo);">
+                    ${textos.weAwait}
+                </p>
+            </div>
+        </div>
+    </section>
+`;
 
     document.querySelectorAll('.pagina').forEach(pagina => {
         pagina.classList.remove('activa');
