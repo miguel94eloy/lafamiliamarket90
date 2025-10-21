@@ -332,14 +332,14 @@ function inicializarMapa() {
             lat: 25.948696,
             lng: -80.244805,
             direccion: '19139 NW 27th Ave, Miami, FL 33114',
-            enlace: 'https://maps.app.goo.gl/fS89V83GGuPCXW3H6?g_st=awb'
+            enlace: 'https://www.google.com/maps?q=25.79925,-80.24017'
         },
         {
             nombre: 'Familia Market - Allapattah', 
     lat: 25.79925,
     lng: -80.24017,
     direccion: '2412 NW 27th Ave, Miami, FL 33142',  // ✅ CORRECTA
-    enlace: 'https://www.google.com/maps?q=25.79925,-80.24017'
+    enlace: 'https://www.google.com/maps?q=25.94007,-80.2605642'
         },
         {
     nombre: 'Familia Market - Opa-Locka',
