@@ -332,7 +332,7 @@ function inicializarMapa() {
             lat: 25.94007,
             lng: -80.2605642,
             direccion: '19139 NW 27th Ave, Miami, FL 33114',
-            enlace: 'https://maps.app.goo.gl/fS89V83GGuPCXW3H6?g_st=awb'
+            enlace: 'https://maps.app.goo.gl/88tLF5A6rPvrd6gd9'
         },
         {
             nombre: 'Familia Market - Allapattah', 
