@@ -153,16 +153,16 @@ const sobreTiendas = {
         }
     },
     'sobre-tienda3': {
-        titulo: {
-            en: 'Familia Market - South Miami Heights', 
-            es: 'Familia Market - South Miami Heights'
-        },
-        imagenes: ['sobre-tienda3-portada-1', 'sobre-tienda3-portada-2'],
-        descripcion: {
-            en: 'In South Miami Heights, our store stands out for its ample parking, easy access and the best selection of personal hygiene and home care products. We are the ideal destination for families who value comfort, variety and that personalized treatment that characterizes us. As your trusted grocery store, we offer everything you need: from basic groceries to convenience store, liquor store, tobacco shop, sandwich shop and foodstand services. 🚫 We do not accept delivery - visit us at our physical location. Phone: 786 661 8524. With years of experience serving the community, we know exactly what your family needs and we are proud to offer it to you.',
-            es: 'En South Miami Heights, nuestra tienda se destaca por su amplio estacionamiento, fácil acceso y la mejor selección de productos de higiene personal y cuidado del hogar. Somos el destino ideal para familias que valoran la comodidad, la variedad y ese trato personalizado que nos caracteriza. Como tu supermercado de confianza, ofrecemos todo lo que necesitas: desde comestibles básicos hasta servicios de tienda de conveniencia, licorería, tabaquería, sandwich shop y comida rápida. 🚫 No aceptamos delivery - visítanos en nuestra ubicación física. Teléfono: 786 661 8524. Con años de experiencia sirviendo a la comunidad, sabemos exactamente lo que tu familia necesita y estamos orgullosos de ofrecértelo.'
-        }
+    titulo: {
+        en: 'Familia Market - Opa-locka',  // ✅ CORREGIDO
+        es: 'Familia Market - Opa-locka'   // ✅ CORREGIDO
+    },
+    imagenes: ['sobre-tienda3-portada-1', 'sobre-tienda3-portada-2'],
+    descripcion: {
+        en: 'In Opa-locka, our store stands out for its ample parking, easy access and the best selection of personal hygiene and home care products. We are the ideal destination for families who value comfort, variety and that personalized treatment that characterizes us. As your trusted grocery store, we offer everything you need: from basic groceries to convenience store, liquor store, tobacco shop, sandwich shop and foodstand services. 🚫 We do not accept delivery - visit us at our physical location. Phone: 786 661 8524. With years of experience serving the community, we know exactly what your family needs and we are proud to offer it to you.',
+        es: 'En Opa-locka, nuestra tienda se destaca por su amplio estacionamiento, fácil acceso y la mejor selección de productos de higiene personal y cuidado del hogar. Somos el destino ideal para familias que valoran la comodidad, la variedad y ese trato personalizado que nos caracteriza. Como tu supermercado de confianza, ofrecemos todo lo que necesitas: desde comestibles básicos hasta servicios de tienda de conveniencia, licorería, tabaquería, sandwich shop y comida rápida. 🚫 No aceptamos delivery - visítanos en nuestra ubicación física. Teléfono: 786 661 8524. Con años de experiencia sirviendo a la comunidad, sabemos exactamente lo que tu familia necesita y estamos orgullosos de ofrecértelo.'
     }
+}
 };
 
 // DETECCIÓN DE MÓVIL
