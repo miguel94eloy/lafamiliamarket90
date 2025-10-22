@@ -4,13 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="Content-Security-Policy" 
-          content="default-src 'self' https:;
-                   script-src 'self' https://unpkg.com 'unsafe-inline';
-                   style-src 'self' https://fonts.googleapis.com https://unpkg.com 'unsafe-inline';
-                   img-src 'self' data: https:;
-                   font-src 'self' https://fonts.gstatic.com;
-                   connect-src 'self' https://fonts.gstatic.com;  
-                   frame-src https://maps.google.com https://www.google.com">
+      content="default-src 'self' https:;
+               script-src 'self' https://unpkg.com 'unsafe-inline';
+               style-src 'self' https://fonts.googleapis.com https://unpkg.com 'unsafe-inline';
+               img-src 'self' data: https:;
+               font-src 'self' https://fonts.gstatic.com data:;
+               connect-src 'self' https://fonts.gstatic.com https://*.tile.openstreetmap.org https://unpkg.com;
+               frame-src https://maps.google.com https://www.google.com">
+
 
 <!-- Favicon estándar para compatibilidad universal -->
 <link rel="icon" href="/favicon.ico" type="image/x-icon" sizes="any">
