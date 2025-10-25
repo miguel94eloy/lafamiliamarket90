@@ -54,77 +54,117 @@
     
     <!-- Schema.org LocalBusiness -->
     <script type="application/ld+json">
-    {
-        "@context": "https://schema.org",
-        "@type": "LocalBusiness",
-        "name": "La Familia Market",
-        "image": "https://lafamiliamarket90.com/images/header/logo-principal.webp",
-        "description": "Supermercado, Tienda de Conveniencia, Licorería, Tabaquería, Sandwich Shop y Comida Rápida en Miami",
-        "url": "https://lafamiliamarket90.com/index-es.html",
-        "telephone": "+1-786-661-8524",
-        "address": {
-            "@type": "PostalAddress",
-            "streetAddress": "19139 NW 27th Ave",
-            "addressLocality": "Miami",
-            "addressRegion": "FL",
-            "postalCode": "33114",
-            "addressCountry": "US"
-        },
-        "openingHours": [
-            "Mo-Su 08:00-02:00"
-        ],
-        "priceRange": "$",
-        "areaServed": "Miami Dade County",
-        "hasOfferCatalog": {
-            "@type": "OfferCatalog",
-            "name": "Productos y Servicios",
-            "itemListElement": [
-                {
-                    "@type": "Offer",
-                    "itemOffered": {
-                        "@type": "Service",
-                        "name": "Supermercado - Comestibles"
-                    }
-                },
-                {
-                    "@type": "Offer",
-                    "itemOffered": {
-                        "@type": "Service",
-                        "name": "Licorería - Licores"
-                    }
-                },
-                {
-                    "@type": "Offer",
-                    "itemOffered": {
-                        "@type": "Service",
-                        "name": "Tienda de Conveniencia"
-                    }
-                },
-                {
-                    "@type": "Offer",
-                    "itemOffered": {
-                        "@type": "Service",
-                        "name": "Tabaquería - Tabaco"
-                    }
-                },
-                {
-                    "@type": "Offer",
-                    "itemOffered": {
-                        "@type": "Service",
-                        "name": "Sandwich Shop - Sandwiches"
-                    }
-                },
-                {
-                    "@type": "Offer",
-                    "itemOffered": {
-                        "@type": "Service",
-                        "name": "Comida Rápida"
-                    }
-                }
+{
+    "@context": "https://schema.org",
+    "@graph": [
+        {
+            "@type": "Organization",
+            "@id": "https://lafamiliamarket90.com/#organization",
+            "name": "La Familia Market",
+            "url": "https://lafamiliamarket90.com/index-es.html",
+            "logo": "https://lafamiliamarket90.com/images/header/logo-principal.webp",
+            "description": "Supermercados y tiendas de conveniencia en el condado de Miami-Dade que ofrecen comestibles, licores, tabaco, sandwiches, transferencias de dinero, lotería y aceptación de EBT.",
+            "sameAs": [
+                "https://www.instagram.com/lafamiliamarket_llc/",
+                "https://www.tiktok.com/@lafamiliamarket_llc"
             ]
+        },
+        {
+            "@type": ["GroceryStore", "ConvenienceStore", "LiquorStore"],
+            "@id": "https://lafamiliamarket90.com/#miami-gardens",
+            "name": "Familia Market - Miami Gardens",
+            "description": "Supermercado, tienda de conveniencia, licorería, tabaquería y sandwich shop en Miami Gardens. Transferencias RIA, BOSS Revolution, Lotería de Florida, aceptamos EBT.",
+            "image": "https://lafamiliamarket90.com/images/header/logo-principal.webp",
+            "url": "https://lafamiliamarket90.com/index-es.html",
+            "telephone": "+1-786-661-8524",
+            "priceRange": "$",
+            "openingHours": [
+                "Lunes-Miércoles 08:00-00:00",
+                "Jueves-Domingo 08:00-01:00"
+            ],
+            "address": {
+                "@type": "PostalAddress",
+                "streetAddress": "3602 NW 183rd St",
+                "addressLocality": "Miami Gardens",
+                "addressRegion": "FL",
+                "postalCode": "33056",
+                "addressCountry": "US"
+            },
+            "geo": {
+                "@type": "GeoCoordinates",
+                "latitude": 25.94007,
+                "longitude": -80.2605642
+            },
+            "areaServed": "Condado de Miami-Dade",
+            "parentOrganization": {
+                "@id": "https://lafamiliamarket90.com/#organization"
+            },
+            "servesCuisine": ["Sandwiches", "Comida Rápida"],
+            "paymentAccepted": ["Efectivo", "Tarjeta de Crédito", "Tarjeta de Débito", "EBT"]
+        },
+        {
+            "@type": ["GroceryStore", "ConvenienceStore", "LiquorStore"],
+            "@id": "https://lafamiliamarket90.com/#allapattah",
+            "name": "Familia Market - Allapattah",
+            "description": "Supermercado, tienda de conveniencia, licorería, tabaquería y sandwich shop en Allapattah, Miami. Abierto hasta las 2 AM diariamente.",
+            "image": "https://lafamiliamarket90.com/images/header/logo-principal.webp",
+            "url": "https://lafamiliamarket90.com/index-es.html",
+            "telephone": "+1-786-661-8524",
+            "priceRange": "$",
+            "openingHours": "Lunes-Domingo 08:00-02:00",
+            "address": {
+                "@type": "PostalAddress",
+                "streetAddress": "2412 NW 27th Ave",
+                "addressLocality": "Miami",
+                "addressRegion": "FL",
+                "postalCode": "33142",
+                "addressCountry": "US"
+            },
+            "geo": {
+                "@type": "GeoCoordinates",
+                "latitude": 25.7992478,
+                "longitude": -80.2401648
+            },
+            "areaServed": "Condado de Miami-Dade",
+            "parentOrganization": {
+                "@id": "https://lafamiliamarket90.com/#organization"
+            },
+            "servesCuisine": ["Sandwiches", "Comida Rápida"],
+            "paymentAccepted": ["Efectivo", "Tarjeta de Crédito", "Tarjeta de Débito", "EBT"]
+        },
+        {
+            "@type": ["GroceryStore", "ConvenienceStore", "LiquorStore"],
+            "@id": "https://lafamiliamarket90.com/#opa-locka",
+            "name": "Familia Market - Opa-Locka",
+            "description": "Supermercado, tienda de conveniencia, licorería, tabaquería y sandwich shop en Opa-Locka, North Miami. Abierto hasta las 2 AM diariamente.",
+            "image": "https://lafamiliamarket90.com/images/header/logo-principal.webp",
+            "url": "https://lafamiliamarket90.com/index-es.html",
+            "telephone": "+1-786-661-8524",
+            "priceRange": "$",
+            "openingHours": "Lunes-Domingo 08:00-02:00",
+            "address": {
+                "@type": "PostalAddress",
+                "streetAddress": "10139 NW 27th Ave",
+                "addressLocality": "North Miami",
+                "addressRegion": "FL",
+                "postalCode": "33147",
+                "addressCountry": "US"
+            },
+            "geo": {
+                "@type": "GeoCoordinates",
+                "latitude": 25.8669296,
+                "longitude": -80.2423812
+            },
+            "areaServed": "Condado de Miami-Dade",
+            "parentOrganization": {
+                "@id": "https://lafamiliamarket90.com/#organization"
+            },
+            "servesCuisine": ["Sandwiches", "Comida Rápida"],
+            "paymentAccepted": ["Efectivo", "Tarjeta de Crédito", "Tarjeta de Débito", "EBT"]
         }
-    }
-    </script>
+    ]
+}
+</script>
 </head>
 <body>
     <!-- HEADER PRINCIPAL PREMIUM -->
